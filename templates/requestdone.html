@@ -1,0 +1,222 @@
+{% comment %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Your Account | Registration Success</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+</head>
+<body>
+
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="container">
+        <div class="activation-card animate__animated animate__zoomIn">
+            <div class="checkmark-wrapper">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+
+            <span class="user-greeting">Hello, {{ user.full_name }}!</span>
+            
+            <h1>Registration Successful</h1>
+            
+            <p class="instruction">
+                We've sent a magic link to your inbox. Please click the link to verify your identity and activate your account.
+            </p>
+
+            <div class="email-status animate__animated animate__fadeInUp animate__delay-1s">
+                <i class="fas fa-paper-plane"></i>
+                <span>Check your email (and spam folder) for the activation link.</span>
+            </div>
+
+            <a href="/" class="btn-home animate__animated animate__fadeInUp animate__delay-1s">
+                <i class="fas fa-house"></i> Go to Homepage
+            </a>
+
+            <div class="footer-note animate__animated animate__fadeIn animate__delay-2s">
+                Didn't receive an email? <a href="/register/">Try again</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> {% endcomment %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'scale-in': 'scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                        'bounce-subtle': 'bounceSubtle 2s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.5)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(-5%)' },
+                            '50%': { transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden; 
+        }
+
+        /* Abstract Background Elements */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Custom Email Icon Glow */
+        .email-glow {
+            box-shadow: 0 0 35px rgba(233, 196, 106, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col items-center justify-center relative px-4 py-10">
+
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] top-[-10%] left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-accent w-[25rem] h-[25rem] bottom-[10%] right-[-5%] animate-float-delayed opacity-30"></div>
+
+    <!-- Floating Back Button -->
+    <div class="absolute top-6 left-6 sm:top-10 sm:left-10 z-50 animate-fade-in-up">
+        <!-- Using javascript:history.back() as a default reliable back method -->
+        <a href="javascript:history.back()" class="flex items-center gap-2 text-agri-dark bg-white border border-gray-200 px-4 py-2.5 rounded-full font-medium hover:bg-gray-50 hover:border-agri-dark hover:shadow-md transition-all duration-300 transform hover:-translate-x-1 group">
+            <i class="fa-solid fa-arrow-left text-sm group-hover:-translate-x-1 transition-transform"></i>
+            <span>Back</span>
+        </a>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-xl w-full bg-white p-8 sm:p-14 rounded-[2.5rem] shadow-2xl relative z-10 text-center border border-gray-100 opacity-0 animate-fade-in-up" style="animation-delay: 100ms;">
+        
+        <!-- Decorative subtle pattern inside card -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] mix-blend-overlay rounded-[2.5rem] pointer-events-none"></div>
+
+        <!-- Email Icon -->
+        <div class="relative w-24 h-24 mx-auto mb-8 opacity-0 animate-scale-in" style="animation-delay: 300ms;">
+            <!-- Outer pulsing ring -->
+            <div class="absolute inset-0 border-4 border-yellow-100 rounded-full animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+            <!-- Inner circle with icon -->
+            <div class="relative w-full h-full bg-yellow-50 text-agri-accent rounded-full flex items-center justify-center text-4xl email-glow border-2 border-yellow-200 animate-bounce-subtle">
+                <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+        </div>
+
+        <!-- Greeting & Headings -->
+        <p class="text-agri-light font-semibold tracking-wide uppercase text-sm mb-3">
+            Hello, {{ user.full_name }}!
+        </p>
+        
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+            Registration Successful
+        </h1>
+        
+        <p class="text-gray-600 mb-8 text-lg leading-relaxed px-2">
+            We've sent a magic link to your inbox. Please click the link to verify your identity and activate your account.
+        </p>
+
+        <!-- Important Notice Box -->
+        <div class="bg-blue-50 border border-blue-100 p-5 rounded-2xl flex items-start gap-4 text-left mb-10 shadow-inner opacity-0 animate-fade-in-up" style="animation-delay: 500ms;">
+            <div class="mt-1 w-8 h-8 flex-shrink-0 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-paper-plane text-sm"></i>
+            </div>
+            <div>
+                <h4 class="text-blue-900 font-semibold mb-1">Check your email</h4>
+                <p class="text-blue-700 text-sm leading-relaxed">
+                    Don't forget to check your spam or junk folder if you don't see the activation link within a few minutes.
+                </p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col items-center justify-center w-full gap-6 opacity-0 animate-fade-in-up" style="animation-delay: 700ms;">
+            
+            <!-- Home Button -->
+            <a href="/" class="w-full sm:w-auto px-10 py-4 bg-agri-dark text-white font-bold rounded-xl hover:bg-agri-light transition-all duration-300 shadow-lg shadow-agri-dark/20 transform hover:-translate-y-1 flex justify-center items-center gap-3 group">
+                <i class="fa-solid fa-house text-sm group-hover:scale-110 transition-transform"></i>
+                Go to Homepage
+            </a>
+            
+            <!-- Resend Link -->
+            <p class="text-sm text-gray-500">
+                Didn't receive an email? 
+                <!-- Adjust the href below to match your Django URL structure -->
+                <a href="/register/" class="font-bold text-agri-dark hover:text-agri-accent transition-colors underline decoration-2 underline-offset-4 decoration-agri-accent/30 hover:decoration-agri-accent">
+                    Try again
+                </a>
+            </p>
+            
+        </div>
+        
+    </main>
+
+</body>
+</html>

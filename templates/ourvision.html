@@ -1,0 +1,479 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Vision | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White (used only for header/footer consistency)
+                            neon: '#4ade80',     // Bright Green for glowing highlights
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'glow-pulse': 'glowPulse 3s infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        glowPulse: {
+                            '0%': { boxShadow: '0 0 10px rgba(74, 222, 128, 0.2)' },
+                            '100%': { boxShadow: '0 0 30px rgba(74, 222, 128, 0.6)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 
+         * Deep Green Theme - Overriding the default light theme for this specific page 
+         * to strictly follow the "avoid more white colors" instruction.
+         */
+        body {
+            background-color: #0f271d; /* Very deep green base */
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Glowing Orbs to replace white backgrounds */
+        .bg-orb {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.4;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        /* Glassmorphism for navbar (Kept light for consistency with other pages) */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.1);
+        }
+
+        /* Glassmorphism for Dark Cards */
+        .glass-card-dark {
+            background: rgba(45, 106, 79, 0.15); /* Transparent Secondary Green */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(74, 222, 128, 0.1); /* Subtle bright green border */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-dark:hover {
+            transform: translateY(-10px);
+            background: rgba(45, 106, 79, 0.3);
+            border-color: rgba(233, 196, 106, 0.5); /* Gold highlight on hover */
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(45, 106, 79, 0.4);
+        }
+
+        /* Gold Gradient Text */
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #E9C46A, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Bright Green Gradient Text */
+        .text-gradient-green {
+            background: linear-gradient(135deg, #4ade80, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Deep Green Background Animated Orbs -->
+    <div class="bg-orb bg-agri-light w-[40rem] h-[40rem] top-[10%] left-[-10%] animate-float"></div>
+    <div class="bg-orb bg-[#047857] w-[35rem] h-[35rem] top-[40%] right-[-10%] animate-float-delayed opacity-30"></div>
+    <div class="bg-orb bg-agri-dark w-[50rem] h-[50rem] bottom-[-10%] left-[20%] animate-float opacity-50"></div>
+
+    <!-- Header (Identical to Login Page) -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+        <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
+    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full overflow-hidden">
+        
+        <!-- Hero Vision Statement -->
+        <section class="max-w-5xl mx-auto mb-20 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card-dark mb-6 opacity-0 animate-fade-in-up">
+                <i class="fa-solid fa-eye text-agri-accent text-sm"></i>
+                <span class="text-gray-300 text-sm font-medium uppercase tracking-widest">Our Future</span>
+            </div>
+            
+            <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-bold mb-8 opacity-0 animate-fade-in-up delay-100">
+                Our <span class="text-gradient-gold">Vision</span>
+            </h1>
+            
+            <div class="glass-card-dark p-8 md:p-12 rounded-[2.5rem] opacity-0 animate-fade-in-up delay-200 relative overflow-hidden">
+                <!-- Decorative background inside the card -->
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-agri-light opacity-20 rounded-full blur-3xl"></div>
+                <div class="absolute -left-20 -bottom-20 w-64 h-64 bg-agri-accent opacity-10 rounded-full blur-3xl"></div>
+                
+                <p class="text-xl md:text-3xl font-display font-medium text-white leading-relaxed relative z-10">
+                    To become <span class="text-gradient-green font-bold">India's most trusted</span> agriculture career and professional networking platform, connecting students, universities, startups, companies, researchers, and industry experts under one ecosystem.
+                </p>
+            </div>
+        </section>
+
+        <!-- The Catalyst Grid Section -->
+        <section class="max-w-7xl mx-auto mb-24">
+            <div class="text-center mb-12 opacity-0 animate-fade-in-up delay-300">
+                <h2 class="font-display text-2xl md:text-3xl font-semibold text-gray-200">
+                    We envision a future where Agriculture Hub serves as a catalyst for:
+                </h2>
+                <div class="h-1 w-24 bg-agri-light mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                
+                <!-- Catalyst 1 -->
+                <div class="glass-card-dark p-8 rounded-3xl opacity-0 animate-fade-in-up delay-100 group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-agri-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-[#1B4332]/80 border border-agri-light flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        🌾
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 group-hover:text-agri-accent transition-colors">Agriculture Education</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Empowering minds with modern curriculum, mentorship, and practical knowledge bridging the academic gap.</p>
+                </div>
+
+                <!-- Catalyst 2 -->
+                <div class="glass-card-dark p-8 rounded-3xl opacity-0 animate-fade-in-up delay-200 group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-agri-neon transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-[#1B4332]/80 border border-agri-light flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        🚜
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 group-hover:text-agri-neon transition-colors">Agritech Innovation</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Fostering technological advancements, smart farming techniques, and sustainable agricultural practices.</p>
+                </div>
+
+                <!-- Catalyst 3 -->
+                <div class="glass-card-dark p-8 rounded-3xl opacity-0 animate-fade-in-up delay-300 group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-agri-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-[#1B4332]/80 border border-agri-light flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        💡
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 group-hover:text-agri-accent transition-colors">Entrepreneurship</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Incubating ideas, supporting agribusiness startups, and cultivating the next generation of agri-founders.</p>
+                </div>
+
+                <!-- Catalyst 4 -->
+                <div class="glass-card-dark p-8 rounded-3xl opacity-0 animate-fade-in-up delay-400 group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-[#3b82f6] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-[#1B4332]/80 border border-agri-light flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        🌍
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">International Careers</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Unlocking global opportunities, cross-border internships, and worldwide horticultural placements.</p>
+                </div>
+
+                <!-- Catalyst 5 -->
+                <div class="glass-card-dark p-8 rounded-3xl opacity-0 animate-fade-in-up delay-500 group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-agri-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-[#1B4332]/80 border border-agri-light flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        🤝
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 group-hover:text-agri-accent transition-colors">Industry–Academia</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Creating seamless collaboration channels between research institutions, universities, and corporate leaders.</p>
+                </div>
+
+                <!-- Catalyst 6 -->
+                <div class="glass-card-dark p-8 rounded-3xl opacity-0 animate-fade-in-up delay-600 group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-agri-neon transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-[#1B4332]/80 border border-agri-light flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                        📈
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2 group-hover:text-agri-neon transition-colors">Digital Growth</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">Driving digital transformation and providing robust growth strategies for modern agriculture businesses.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Closing Statement Banner -->
+        <section class="max-w-5xl mx-auto opacity-0 animate-fade-in-up delay-500">
+            <div class="bg-gradient-to-r from-agri-accent to-yellow-500 rounded-[2.5rem] p-10 md:p-14 text-center shadow-[0_0_40px_rgba(233,196,106,0.3)] relative overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+                <!-- Inner design element -->
+                <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
+                
+                <h2 class="relative z-10 font-display text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f271d] leading-tight">
+                    Together, we aim to build a stronger, smarter, and more connected agricultural community.
+                </h2>
+                
+                <div class="relative z-10 mt-8">
+                    <a href="/contactus/" class="inline-flex items-center gap-2 bg-[#0f271d] text-white px-8 py-4 rounded-full font-bold hover:bg-gray-900 transition-colors shadow-lg group">
+                        Join the Movement
+                        <i class="fa-solid fa-arrow-right-long group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+<br>
+<!-- 5. Subscribe Section -->
+<section class="max-w-5xl mx-auto opacity-0 animate-fade-in-up delay-500"> <!-- Stronger green background -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+        <div class="bg-gradient-to-r from-[#f0fff0] to-[#d9f5d9] rounded-[2rem] p-8 md:p-12 shadow-inner border border-[#b8e6b8] text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-agri-accent/10 rounded-bl-full"></div>
+            
+            <h3 class="font-display text-3xl font-bold text-agri-dark mb-3 relative z-10">Stay Updated</h3>
+            <p class="text-gray-700 mb-8 max-w-xl mx-auto relative z-10">
+                Get the latest jobs, internships, and agriculture news delivered directly to your inbox.
+            </p>
+            
+            <form class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto relative z-10" action="{% url "subscribe" %}" method="POST">
+                {% csrf_token %}
+                <div class="relative flex-grow">
+                    <i class="fa-regular fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-agri-dark/60"></i>
+                    <input type="email" required name="email"
+                        class="subscribe-input w-full pl-12 pr-4 py-3.5 bg-white border border-[#a8dba8] text-gray-800 placeholder-gray-400 focus:outline-none rounded-xl focus:border-agri-dark" 
+                        placeholder="Enter your email address">
+                </div>
+                <button type="submit" 
+                        class="px-8 py-3.5 bg-agri-dark text-white font-bold rounded-xl hover:bg-agri-light transition-colors shadow-md whitespace-nowrap">
+                    Subscribe Now
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+        
+    </main>
+  <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info (Spans 4 columns) -->
+                <div class="lg:col-span-4 opacity-0 animate-fade-in-up">
+                    <div class="flex items-center mb-6">
+                               
+
+<div class="w-10 h-10 bg-agri-accent rounded-lg flex items-center justify-center shadow-md overflow-hidden">
+    <img src="{% static 'Logo.jpeg' %}" alt="Company Logo" class="w-full h-full object-contain">
+</div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+             
+                    <!-- Social Icons -->
+<div class="flex space-x-4">
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+       class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#FF0000] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
+                        <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
+                        <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="/business_news/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2 opacity-0 animate-fade-in-up delay-200">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/aboutus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="/ourstory/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Story</a></li>
+                        <li><a href="/ourvision/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Vision & Mission</a></li>
+                        <li><a href="/contactus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3 opacity-0 animate-fade-in-up delay-300">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/termsandconditions/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="/subscribe/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Subscribe</a></li>
+                               
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-0 animate-fade-in-up delay-400">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

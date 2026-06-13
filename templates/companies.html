@@ -1,0 +1,1414 @@
+ {% load static %}
+ 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies & Partners | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            blue: '#0284c7',     // Ocean Blue for highlights
+                            teal: '#0f766e',     // Deep Teal
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Blobs with Blue/Green mix */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.25;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        /* Glassmorphism for navbar */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.05);
+        }
+
+        /* Custom Gradients */
+        .text-gradient-blue-green {
+            background: linear-gradient(135deg, #0284c7, #1B4332);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Company Card Hover Effects */
+        .company-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .company-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(2, 132, 199, 0.15); /* Bluish shadow */
+            border-color: rgba(2, 132, 199, 0.3);
+        }
+        
+        /* Limit description text to 3 lines */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Bluish/Greenish Background Animated Shapes -->
+    <div class="bg-shape bg-agri-teal w-[40rem] h-[40rem] top-0 left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-blue w-[35rem] h-[35rem] top-[30%] right-[-10%] animate-float-delayed opacity-20"></div>
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] bottom-[10%] left-[20%] animate-float opacity-20"></div>
+
+    <!-- Header -->
+   <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                         <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+        <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
+    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+<!-- Main Content -->
+    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full overflow-hidden">
+        
+        <!-- Page Header -->
+        <div class="max-w-7xl mx-auto mb-16 text-center opacity-0 animate-fade-in-up">
+            <span class="text-agri-blue font-bold tracking-wider uppercase text-sm mb-2 block">Our Network</span>
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                Companies We <span class="text-gradient-blue-green">Collaborate</span> With
+            </h1>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
+                Discover top organizations, agribusinesses, and agritech startups that are actively hiring and innovating within the Agriculture Hub ecosystem.
+            </p>
+            <div class="h-1.5 w-24 bg-agri-accent mx-auto rounded-full mt-8"></div>
+        </div>
+
+        <!-- Dynamic Company Grid (Django Template Integration) -->
+        <div class="max-w-7xl mx-auto company-grid flex flex-col gap-10">
+            
+            {% for company in companies %}
+            <!-- Full Width Company Card -->
+            <div class="company-card bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg border border-gray-100 relative overflow-hidden flex flex-col lg:flex-row gap-10 opacity-0 animate-fade-in-up" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                
+                <!-- Side Accent Gradient Line -->
+                <div class="absolute top-0 left-0 w-2.5 h-full bg-gradient-to-b from-agri-blue to-agri-teal opacity-90"></div>
+
+                <!-- Left Side: Big Animated Logo & Badges -->
+                <div class="flex flex-col items-center lg:w-1/4 flex-shrink-0">
+                    <!-- Big Logo -->
+                    <div class="logo-anim w-40 h-40 md:w-56 md:h-56 rounded-[2rem] border border-gray-100 bg-white shadow-md flex items-center justify-center p-4 mb-6 z-10 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-50 to-green-50 opacity-50"></div>
+                        {% if company.logo %}
+                            <img src="{{ company.logo.url }}" alt="{{ company.name }} logo" class="w-full h-full object-contain relative z-10">
+                        {% else %}
+                            <i class="fa-solid fa-building text-6xl text-agri-blue relative z-10"></i>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- 5 Star Rating -->
+                    <div class="flex items-center gap-1 text-yellow-400 text-2xl mb-3">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-gray-500 text-sm font-bold ml-2 mt-1">(5.0)</span>
+                    </div>
+
+                    <!-- Verified Badge -->
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-5 py-2.5 rounded-full flex items-center gap-2 text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-shield-check text-lg"></i>
+                        Verified Partner
+                    </div>
+                </div>
+
+                <!-- Right Side: Extensive Details -->
+                <div class="flex flex-col flex-grow justify-between py-2">
+                    <div>
+                        <!-- Header row: Name/Category and Location -->
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+                            <div>
+                                <h3 class="company-name font-display text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-3 hover:text-agri-blue transition-colors cursor-pointer">
+                                    {{ company.name }}
+                                </h3>
+                                <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-blue-50 to-green-50 text-agri-teal text-sm font-bold rounded-full border border-blue-100 shadow-sm">
+                                    <i class="fa-solid fa-tag text-xs opacity-70"></i> {{ company.category }}
+                                </span>
+                            </div>
+
+                            <!-- Location Box (Pushed to the other side) -->
+                            <div class="flex items-center gap-4 bg-gray-50 px-6 py-4 rounded-2xl border border-gray-100 shadow-sm w-full md:w-auto">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 text-agri-blue flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot text-xl"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-gray-500 font-bold uppercase tracking-widest">Headquarters</span>
+                                    <span class="font-bold text-gray-800 text-lg md:text-xl">{{ company.location }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full Description Box -->
+                        <div class="bg-blue-50/40 p-6 md:p-8 rounded-[1.5rem] border border-blue-50 mb-8">
+                            <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                                {{ company.description }}
+                            </p>
+                        </div>
+
+                        <!-- Key Services (Split by JS into individual items) -->
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-agri-accent text-lg"></i> Core Expertise & Services
+                            </h4>
+                            <div class="key-services-container flex flex-wrap gap-3" data-services="{{ company.key_services }}">
+                                <!-- JavaScript will inject stylized badges here based on comma separation -->
+                                <noscript>
+                                    <div class="px-5 py-3 bg-white border-2 border-gray-100 rounded-xl text-gray-700 font-medium">
+                                        {{ company.key_services }}
+                                    </div>
+                                </noscript>
+                            </div>
+                        </div>
+                    </div>
+{% comment %} 
+                    <!-- Footer: Action Button -->
+                    <div class="mt-auto pt-8 border-t border-gray-100 flex justify-end">
+                        {% if company.website %}
+                            <a href="{{ company.website }}" target="_blank" class="w-full md:w-auto inline-flex justify-center items-center gap-3 px-10 py-4 md:py-5 bg-white hover:bg-gradient-to-r hover:from-agri-blue hover:to-agri-teal hover:text-white text-agri-blue font-bold text-lg rounded-2xl transition-all duration-300 border-2 border-agri-blue/20 hover:border-transparent shadow-md hover:shadow-xl transform hover:-translate-y-1 group">
+                                Visit Company Website 
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </a>
+                        {% endif %}
+                    </div> {% endcomment %}
+
+                    <!-- Footer: Action Buttons -->
+<div class="mt-auto pt-8 border-t border-gray-100 flex flex-col md:flex-row gap-4 justify-end">
+    
+    {% if company.website %}
+    <!-- Visit Website Button -->
+    <a href="{{ company.website }}" target="_blank"
+       class="group inline-flex justify-center items-center gap-3 px-8 py-3 bg-white 
+              hover:bg-gradient-to-r hover:from-agri-blue hover:to-agri-teal hover:text-white 
+              text-agri-blue font-bold text-base rounded-xl transition-all duration-300 
+              border-2 border-agri-blue/20 hover:border-transparent shadow-md hover:shadow-lg 
+              transform hover:-translate-y-1">
+        Visit Company Website
+        <i class="fa-solid fa-arrow-up-right-from-square text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+    </a>
+    {% endif %}
+
+    <!-- Know More Button -->
+    <a href="{% url 'company_detail' company.company_id %}" 
+       class="group inline-flex justify-center items-center gap-3 px-8 py-3 bg-agri-accent 
+              text-white font-bold text-base rounded-xl transition-all duration-300 
+              hover:bg-agri-dark shadow-md hover:shadow-lg transform hover:-translate-y-1">
+        Know More About {{ company.name }}
+        <i class="fa-solid fa-arrow-right-long text-lg group-hover:translate-x-1 transition-transform"></i>
+    </a>
+</div>
+
+                </div>
+            </div>
+            
+            {% empty %}
+            <!-- Empty State Display -->
+            <div class="text-center py-24 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 opacity-0 animate-fade-in-up delay-200">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+ {% endfor %}
+
+        </div>
+    </main>
+  <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info (Spans 4 columns) -->
+                <div class="lg:col-span-4 opacity-0 animate-fade-in-up">
+                    <div class="flex items-center mb-6">
+                               
+
+<div class="w-10 h-10 bg-agri-accent rounded-lg flex items-center justify-center shadow-md overflow-hidden">
+    <img src="{% static 'Logo.jpeg' %}" alt="Company Logo" class="w-full h-full object-contain">
+</div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+             
+                    <!-- Social Icons -->
+<div class="flex space-x-4">
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+       class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#FF0000] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
+                        <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
+                        <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="/business_news/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2 opacity-0 animate-fade-in-up delay-200">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/aboutus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="/ourstory/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Story</a></li>
+                        <li><a href="/ourvision/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Vision & Mission</a></li>
+                        <li><a href="/contactus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3 opacity-0 animate-fade-in-up delay-300">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/termsandconditions/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="/subscribe/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Subscribe</a></li>
+                               
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-0 animate-fade-in-up delay-400">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+            
+            // Optional: Scroll Reveal Animation Logic (if dynamic content loading)
+            const revealElements = document.querySelectorAll('.animate-fade-in-up');
+            const revealOptions = {
+                threshold: 0.1, 
+                rootMargin: "0px 0px -50px 0px" 
+            };
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+            revealElements.forEach(el => revealOnScroll.observe(el));
+        });
+    </script>
+</body>
+</html> 
+
+{% comment %} 
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies & Partners | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            blue: '#0284c7',     // Ocean Blue for highlights
+                            teal: '#0f766e',     // Deep Teal
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Blobs with Blue/Green mix */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.25;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        /* Glassmorphism for navbar */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.05);
+        }
+
+        /* Custom Gradients */
+        .text-gradient-blue-green {
+            background: linear-gradient(135deg, #0284c7, #1B4332);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Company Card Hover Effects */
+        .company-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .company-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(2, 132, 199, 0.15); /* Bluish shadow */
+            border-color: rgba(2, 132, 199, 0.3);
+        }
+        
+        /* Logo Animation */
+        .logo-anim {
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+        }
+        .company-card:hover .logo-anim {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 20px 30px -10px rgba(2, 132, 199, 0.25);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Bluish/Greenish Background Animated Shapes -->
+    <div class="bg-shape bg-agri-teal w-[40rem] h-[40rem] top-0 left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-blue w-[35rem] h-[35rem] top-[30%] right-[-10%] animate-float-delayed opacity-20"></div>
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] bottom-[10%] left-[20%] animate-float opacity-20"></div>
+
+    <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+                    <div class="w-10 h-10 bg-agri-dark text-agri-accent rounded-xl flex items-center justify-center text-xl shadow-lg">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-agri-dark font-medium hover:text-agri-blue transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-blue transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-agri-dark font-medium hover:text-agri-blue transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-blue transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-agri-blue font-bold relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-blue transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="text-agri-dark font-medium hover:text-agri-blue transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-blue transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="join.html" class="bg-gradient-to-r from-agri-dark to-agri-blue text-white px-6 py-2.5 rounded-full font-medium shadow-lg transform -translate-y-0.5 flex items-center gap-2 hover:shadow-xl transition-all duration-300">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-users text-sm text-agri-accent"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-blue focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-blue hover:bg-gray-50 transition">Home</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-blue hover:bg-gray-50 transition">Blogs</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-bold text-agri-blue bg-blue-50 transition">Companies</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-blue hover:bg-gray-50 transition">Business News</a>
+                <a href="join.html" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full overflow-hidden">
+        
+        <!-- Page Header -->
+        <div class="max-w-7xl mx-auto mb-16 text-center opacity-0 animate-fade-in-up">
+            <span class="text-agri-blue font-bold tracking-wider uppercase text-sm mb-2 block">Our Network</span>
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                Companies We <span class="text-gradient-blue-green">Collaborate</span> With
+            </h1>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
+                Discover top organizations, agribusinesses, and agritech startups that are actively hiring and innovating within the Agriculture Hub ecosystem.
+            </p>
+            <div class="h-1.5 w-24 bg-agri-accent mx-auto rounded-full mt-8"></div>
+        </div>
+
+        <!-- Dynamic Company Grid (Django Template Integration) -->
+        <div class="max-w-7xl mx-auto company-grid flex flex-col gap-10">
+            
+            {% for company in companies %}
+            <!-- Full Width Company Card -->
+            <div class="company-card bg-white rounded-[2.5rem] p-8 md:p-12 shadow-lg border border-gray-100 relative overflow-hidden flex flex-col lg:flex-row gap-10 opacity-0 animate-fade-in-up" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                
+                <!-- Side Accent Gradient Line -->
+                <div class="absolute top-0 left-0 w-2.5 h-full bg-gradient-to-b from-agri-blue to-agri-teal opacity-90"></div>
+
+                <!-- Left Side: Big Animated Logo & Badges -->
+                <div class="flex flex-col items-center lg:w-1/4 flex-shrink-0">
+                    <!-- Big Logo -->
+                    <div class="logo-anim w-40 h-40 md:w-56 md:h-56 rounded-[2rem] border border-gray-100 bg-white shadow-md flex items-center justify-center p-4 mb-6 z-10 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-50 to-green-50 opacity-50"></div>
+                        {% if company.logo %}
+                            <img src="{{ company.logo.url }}" alt="{{ company.name }} logo" class="w-full h-full object-contain relative z-10">
+                        {% else %}
+                            <i class="fa-solid fa-building text-6xl text-agri-blue relative z-10"></i>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- 5 Star Rating -->
+                    <div class="flex items-center gap-1 text-yellow-400 text-2xl mb-3">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <span class="text-gray-500 text-sm font-bold ml-2 mt-1">(5.0)</span>
+                    </div>
+
+                    <!-- Verified Badge -->
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-5 py-2.5 rounded-full flex items-center gap-2 text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-shield-check text-lg"></i>
+                        Verified Partner
+                    </div>
+                </div>
+
+                <!-- Right Side: Extensive Details -->
+                <div class="flex flex-col flex-grow justify-between py-2">
+                    <div>
+                        <!-- Header row: Name/Category and Location -->
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+                            <div>
+                                <h3 class="company-name font-display text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-3 hover:text-agri-blue transition-colors cursor-pointer">
+                                    {{ company.name }}
+                                </h3>
+                                <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-blue-50 to-green-50 text-agri-teal text-sm font-bold rounded-full border border-blue-100 shadow-sm">
+                                    <i class="fa-solid fa-tag text-xs opacity-70"></i> {{ company.category }}
+                                </span>
+                            </div>
+
+                            <!-- Location Box (Pushed to the other side) -->
+                            <div class="flex items-center gap-4 bg-gray-50 px-6 py-4 rounded-2xl border border-gray-100 shadow-sm w-full md:w-auto">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 text-agri-blue flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-location-dot text-xl"></i>
+                                </div>
+                                <div>
+                                    <span class="block text-xs text-gray-500 font-bold uppercase tracking-widest">Headquarters</span>
+                                    <span class="font-bold text-gray-800 text-lg md:text-xl">{{ company.location }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full Description Box -->
+                        <div class="bg-blue-50/40 p-6 md:p-8 rounded-[1.5rem] border border-blue-50 mb-8">
+                            <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                                {{ company.description }}
+                            </p>
+                        </div>
+
+                        <!-- Key Services (Split by JS into individual items) -->
+                        <div class="mb-8">
+                            <h4 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-agri-accent text-lg"></i> Core Expertise & Services
+                            </h4>
+                            <div class="key-services-container flex flex-wrap gap-3" data-services="{{ company.key_services }}">
+                                <!-- JavaScript will inject stylized badges here based on comma separation -->
+                                <noscript>
+                                    <div class="px-5 py-3 bg-white border-2 border-gray-100 rounded-xl text-gray-700 font-medium">
+                                        {{ company.key_services }}
+                                    </div>
+                                </noscript>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer: Action Button -->
+                    <div class="mt-auto pt-8 border-t border-gray-100 flex justify-end">
+                        {% if company.website %}
+                            <a href="{{ company.website }}" target="_blank" class="w-full md:w-auto inline-flex justify-center items-center gap-3 px-10 py-4 md:py-5 bg-white hover:bg-gradient-to-r hover:from-agri-blue hover:to-agri-teal hover:text-white text-agri-blue font-bold text-lg rounded-2xl transition-all duration-300 border-2 border-agri-blue/20 hover:border-transparent shadow-md hover:shadow-xl transform hover:-translate-y-1 group">
+                                Visit Company Website 
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            {% empty %}
+            <!-- Empty State Display -->
+            <div class="text-center py-24 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 opacity-0 animate-fade-in-up delay-200">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+ {% endfor %}
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Mentorship</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Webinars</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Opportunities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Startups</a></li>
+                        <li><a href="#" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="join.html" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+            
+            // Optional: Scroll Reveal Animation Logic (if dynamic content loading)
+        const revealElements = document.querySelectorAll('.animate-fade-in-up');
+        const revealOptions = {
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px" 
+        };
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // Dynamic Key Services Splitter
+        const serviceContainers = document.querySelectorAll('.key-services-container');
+        serviceContainers.forEach(container => {
+            const servicesRaw = container.getAttribute('data-services');
+            if (servicesRaw) {
+                // Clear the noscript fallback if JS is active
+                container.innerHTML = '';
+                
+                // Split by comma, trim whitespace, and filter out empty strings
+                const servicesList = servicesRaw.split(',').map(s => s.trim()).filter(Boolean);
+                
+                servicesList.forEach(service => {
+                    const badge = document.createElement('div');
+                    // Styling for individual service items
+                    badge.className = 'px-5 py-3 bg-white border-2 border-gray-100 rounded-xl text-gray-800 font-bold shadow-sm hover:border-agri-blue hover:text-agri-blue transition-colors cursor-default flex items-center gap-2';
+                    badge.innerHTML = `<i class="fa-solid fa-check-circle text-agri-accent text-lg"></i> ${service}`;
+                    container.appendChild(badge);
+                });
+            }
+        });
+    });
+    </script>
+</body>
+</html> {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies & Partners | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            blue: '#0284c7',     // Ocean Blue for highlights
+                            teal: '#0f766e',     // Deep Teal
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Blobs with Blue/Green mix */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.25;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        /* Glassmorphism for navbar */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.05);
+        }
+
+        /* Custom Gradients */
+        .text-gradient-blue-green {
+            background: linear-gradient(135deg, #0284c7, #1B4332);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* New Profile Card Styles */
+        .profile-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(243, 244, 246, 1);
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(2, 132, 199, 0.15);
+            border-color: rgba(2, 132, 199, 0.2);
+        }
+
+        .cover-banner {
+            height: 140px;
+            background: linear-gradient(135deg, #1B4332, #0284c7);
+            position: relative;
+        }
+
+        /* Subtle pattern overlay for banner */
+        .cover-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+        }
+
+        .logo-container {
+            width: 130px;
+            height: 130px;
+            margin-top: -65px; /* Pulls logo up into the banner */
+            background: white;
+            border-radius: 1.5rem;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+            border: 4px solid white;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-card:hover .logo-container {
+            transform: scale(1.05) rotate(-2deg);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Bluish/Greenish Background Animated Shapes -->
+    <div class="bg-shape bg-agri-teal w-[40rem] h-[40rem] top-0 left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-blue w-[35rem] h-[35rem] top-[30%] right-[-10%] animate-float-delayed opacity-20"></div>
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] bottom-[10%] left-[20%] animate-float opacity-20"></div>
+
+    <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+                    <div class="w-10 h-10 bg-agri-dark text-agri-accent rounded-xl flex items-center justify-center text-xl shadow-lg">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-agri-dark font-medium hover:text-agri-blue transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-blue transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-agri-dark font-medium hover:text-agri-blue transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-blue transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-agri-blue font-bold relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-blue transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="text-agri-dark font-medium hover:text-agri-blue transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-blue transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="join.html" class="bg-gradient-to-r from-agri-dark to-agri-blue text-white px-6 py-2.5 rounded-full font-medium shadow-lg transform -translate-y-0.5 flex items-center gap-2 hover:shadow-xl transition-all duration-300">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-users text-sm text-agri-accent"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-blue focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-blue hover:bg-gray-50 transition">Home</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-blue hover:bg-gray-50 transition">Blogs</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-bold text-agri-blue bg-blue-50 transition">Companies</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-blue hover:bg-gray-50 transition">Business News</a>
+                <a href="join.html" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full overflow-hidden">
+        
+        <!-- Page Header -->
+        <div class="max-w-7xl mx-auto mb-16 text-center opacity-0 animate-fade-in-up">
+            <span class="text-agri-blue font-bold tracking-wider uppercase text-sm mb-2 block">Our Network</span>
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                Companies We <span class="text-gradient-blue-green">Collaborate</span> With
+            </h1>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
+                Discover top organizations, agribusinesses, and agritech startups that are actively hiring and innovating within the Agriculture Hub ecosystem.
+            </p>
+            <div class="h-1.5 w-24 bg-agri-accent mx-auto rounded-full mt-8"></div>
+        </div>
+
+        <!-- Dynamic Company Grid (Django Template Integration) -->
+        <div class="max-w-5xl mx-auto flex flex-col gap-12">
+            
+            {% for company in companies %}
+            <!-- Featured Directory Profile Card -->
+            <div class="profile-card opacity-0 animate-fade-in-up" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                
+                <!-- Cover Banner -->
+                <div class="cover-banner"></div>
+
+                <!-- Main Card Body -->
+                <div class="px-6 sm:px-10 pb-10 relative">
+                    
+                    <!-- Header Row: Logo & Top Badges -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-6">
+                        
+                        <!-- Big Overlapping Logo -->
+                        <div class="logo-container flex items-center justify-center bg-gray-50 overflow-hidden">
+                            {% if company.logo %}
+                                <img src="{{ company.logo.url }}" alt="{{ company.name }} logo" class="w-full h-full object-contain">
+                            {% else %}
+                                <i class="fa-solid fa-building text-5xl text-gray-300"></i>
+                            {% endif %}
+                        </div>
+
+                        <!-- Right Side Ratings & Verified -->
+                        <div class="flex flex-wrap items-center gap-3 pt-4 sm:pt-0">
+                            <!-- 5 Stars -->
+                            <div class="flex items-center gap-1 bg-yellow-50 px-3 py-1.5 rounded-xl border border-yellow-100">
+                                <div class="text-yellow-400 text-sm flex gap-0.5">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="text-yellow-700 text-xs font-bold ml-1">5.0</span>
+                            </div>
+
+                            <!-- Verified Badge -->
+                            <div class="flex items-center gap-1.5 bg-green-50 px-3 py-1.5 rounded-xl border border-green-100 text-green-700 text-xs font-bold">
+                                <i class="fa-solid fa-shield-check"></i> Verified
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Details -->
+                    <div class="mb-8">
+                        <h2 class="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4 hover:text-agri-blue transition-colors cursor-pointer">
+                            {{ company.name }}
+                        </h2>
+                        
+                        <!-- Tags: Category & Location -->
+                        <div class="flex flex-wrap items-center gap-3 mb-6">
+                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-agri-blue text-sm font-semibold rounded-lg border border-blue-100">
+                                <i class="fa-solid fa-layer-group text-xs"></i> {{ company.category }}
+                            </span>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg border border-gray-200">
+                                <i class="fa-solid fa-location-dot text-agri-dark text-xs"></i> {{ company.location }}
+                            </span>
+                        </div>
+
+                        <!-- Spacious Description -->
+                        <div class="prose prose-lg max-w-none text-gray-600 leading-relaxed bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
+                            {{ company.description }}
+                        </div>
+                    </div>
+
+                    <!-- Key Services (Rendered via JS into pill badges) -->
+                    <div class="mb-8">
+                        <h4 class="text-sm font-bold text-gray-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-agri-accent"></i> Core Expertise
+                        </h4>
+                        <!-- The hidden raw data -->
+                        <div class="services-raw hidden">{{ company.key_services }}</div>
+                        <!-- The target container for the beautiful badges -->
+                        <div class="services-container flex flex-wrap gap-2.5">
+                            <!-- Fallback for no-js -->
+                            <noscript><span class="text-gray-600 bg-gray-100 px-3 py-1 rounded">{{ company.key_services }}</span></noscript>
+                        </div>
+                    </div>
+
+                    <!-- Footer Action -->
+                    <div class="pt-6 border-t border-gray-100">
+                        {% if company.website %}
+                            <a href="{{ company.website }}" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-8 py-4 bg-agri-dark hover:bg-agri-blue text-white font-bold text-lg rounded-xl transition-colors duration-300 shadow-md hover:shadow-lg group">
+                                Visit Company Website 
+                                <i class="fa-solid fa-arrow-up-right-from-square text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            
+            {% empty %}
+            <!-- Empty State Display -->
+            <div class="text-center py-24 bg-white rounded-[2.5rem] shadow-sm border border-gray-100 opacity-0 animate-fade-in-up delay-200">
+                <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-building-circle-xmark text-4xl text-gray-400"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">No Companies Found</h3>
+                <p class="text-gray-500">Check back later as we are constantly growing our network.</p>
+            </div>
+            {% endfor %}
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Mentorship</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Webinars</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Opportunities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Startups</a></li>
+                        <li><a href="#" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="join.html" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+            
+            // Optional: Scroll Reveal Animation Logic (if dynamic content loading)
+        const revealElements = document.querySelectorAll('.animate-fade-in-up');
+        const revealOptions = {
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px" 
+        };
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // Improved Dynamic Key Services Splitter
+        document.querySelectorAll('.profile-card').forEach(card => {
+            const rawDataEl = card.querySelector('.services-raw');
+            const container = card.querySelector('.services-container');
+            
+            if (rawDataEl && container) {
+                const text = rawDataEl.textContent || rawDataEl.innerText;
+                if (text.trim()) {
+                    // Split by comma, clean whitespace, remove empty items
+                    const services = text.split(',').map(s => s.trim()).filter(Boolean);
+                    
+                    container.innerHTML = services.map(service => 
+                        `<span class="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-blue-50 to-green-50 text-agri-dark rounded-xl border border-gray-200 text-sm font-semibold shadow-sm hover:border-agri-blue hover:text-agri-blue transition-colors cursor-default">
+                            <i class="fa-solid fa-check text-agri-accent"></i> ${service}
+                        </span>`
+                    ).join('');
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html> {% endcomment %}

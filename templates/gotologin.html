@@ -1,0 +1,266 @@
+{% comment %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Activated | SmartMart</title>
+    <style>
+        /* Modern Reset and Variables */
+        :root {
+            --primary-blue: #1e90ff;
+            --accent-gold: #ffd700;
+            --success-green: #2ae32a;
+            --glass-bg: rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'myapp/images/bgabout.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(135deg, rgba(95, 158, 160, 0.9), rgba(30, 144, 255, 0.9));
+            backdrop-filter: blur(15px);
+            padding: 50px 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .icon-box {
+            margin-bottom: 25px;
+        }
+
+        .icon-box svg {
+            width: 80px;
+            height: 80px;
+            fill: var(--accent-gold);
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .btn-link {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #fff;
+            color: #333;
+            padding: 14px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-link:hover {
+            background-color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-link:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 20px;
+            }
+            h2 {
+                font-size: 1.25rem;
+            }
+            .btn-link {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-box">
+            <!-- Inline SVG for a Success Checkmark -->
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        </div>
+        
+        <h2>Thank you for your email confirmation. Your account is now active. You can log in.</h2>
+        
+        <a href="{% url 'login' %}" class="btn-link">Login</a>
+    </div>
+</body>
+</html> {% endcomment %} 
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Activated | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'scale-in': 'scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.5)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow: hidden; /* Prevent scrolling on this focused page */
+        }
+
+        /* Abstract Background Elements */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Success Icon Glow */
+        .success-glow {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex items-center justify-center relative px-4">
+
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] top-[-10%] left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-accent w-[25rem] h-[25rem] bottom-[-10%] right-[-5%] animate-float-delayed opacity-30"></div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-lg w-full bg-white p-10 sm:p-14 rounded-[2.5rem] shadow-2xl relative z-10 text-center border border-gray-100 opacity-0 animate-fade-in-up">
+        
+        <!-- Decorative subtle pattern inside card -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] mix-blend-overlay rounded-[2.5rem] pointer-events-none"></div>
+
+        <!-- Success Checkmark Icon -->
+        <div class="relative w-24 h-24 mx-auto mb-8 opacity-0 animate-scale-in" style="animation-delay: 200ms;">
+            <!-- Outer pulsing ring -->
+            <div class="absolute inset-0 border-4 border-green-100 rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+            <!-- Inner circle with icon -->
+            <div class="relative w-full h-full bg-green-50 text-green-500 rounded-full flex items-center justify-center text-5xl success-glow border-2 border-green-200">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </div>
+
+        <!-- Headings and Message -->
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+            Account Activated
+        </h1>
+        
+        <p class="text-gray-600 mb-10 text-lg leading-relaxed">
+            Thank you for your email confirmation. Your account is now fully active and you are ready to log in to the community.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full">
+            
+            <!-- Login Button (Primary) -->
+            <a href="/login/" class="flex-1 px-8 py-3.5 bg-agri-dark text-white font-bold rounded-xl hover:bg-agri-light transition-all duration-300 shadow-lg shadow-agri-dark/20 transform hover:-translate-y-1 flex justify-center items-center gap-2 group">
+                <i class="fa-solid fa-arrow-right-to-bracket text-agri-accent group-hover:scale-110 transition-transform"></i>
+                Login Now
+            </a>
+            
+            <!-- Home Button (Secondary) -->
+            <a href="/"
+ class="flex-1 px-8 py-3.5 bg-white border-2 border-gray-200 text-gray-700 font-bold rounded-xl hover:border-agri-dark hover:text-agri-dark transition-all duration-300 shadow-sm transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                <i class="fa-solid fa-house text-sm"></i>
+                Home
+            </a>
+            
+        </div>
+        
+    </main>
+
+</body>
+</html>

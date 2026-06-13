@@ -1,0 +1,1150 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe & Community | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            border: '#e2e8f0'    // Subtle border
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out infinite 2s',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom CSS */
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Blobs */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        /* Glassmorphism for navbar */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.1);
+        }
+
+        /* Custom gradient for hero text */
+        .text-gradient {
+            background: linear-gradient(135deg, #1B4332, #2D6A4F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Input specific focus styling */
+        .subscribe-input:focus {
+            box-shadow: 0 0 0 4px rgba(233, 196, 106, 0.2);
+            border-color: #E9C46A;
+        }
+
+        /* Stat Card Hover Effects */
+        .stat-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(233, 196, 106, 0.5); /* Accent highlight */
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] top-0 left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-accent w-[25rem] h-[25rem] bottom-[10%] right-[-5%] animate-float-delayed opacity-20"></div>
+
+   <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+                    <div class="w-10 h-10 bg-agri-dark text-agri-accent rounded-xl flex items-center justify-center text-xl shadow-lg">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        
+        <div class="max-w-4xl w-full mx-auto text-center">
+            
+            <!-- Hero Icon -->
+            <div class="flex justify-center mb-6 opacity-0 animate-fade-in-up">
+                <div class="w-20 h-20 bg-agri-accent/20 text-agri-accent rounded-full flex items-center justify-center text-3xl border border-agri-accent/30 shadow-lg relative">
+                    <div class="absolute inset-0 rounded-full border-2 border-agri-accent animate-pulse-slow opacity-50"></div>
+                    <i class="fa-solid fa-envelope-open-text z-10 text-agri-dark"></i>
+                </div>
+            </div>
+
+            <!-- Hero Text -->
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-6 opacity-0 animate-fade-in-up delay-100 text-gradient leading-tight">
+                Build the future of agriculture with us.
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-gray-600 mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up delay-200 leading-relaxed">
+                Join thousands of students and professionals already accelerating their careers on <span class="font-semibold text-agri-dark">Agriculture Hub</span>. Get exclusive insights, jobs, and networking delivered straight to your inbox.
+            </p>
+
+            <!-- Subscribe Form -->
+            <div class="max-w-2xl mx-auto bg-white p-2 sm:p-3 rounded-2xl sm:rounded-full shadow-xl border border-gray-100 mb-20 opacity-0 animate-fade-in-up delay-300">
+                <form class="flex flex-col sm:flex-row gap-3" action="#" method="POST" onsubmit="event.preventDefault(); document.getElementById('success-message').classList.remove('hidden');">
+                    <div class="relative flex-grow flex items-center">
+                        <i class="fa-regular fa-envelope absolute left-5 text-gray-400 text-lg"></i>
+                        <input type="email" required 
+                            class="subscribe-input w-full pl-12 pr-6 py-4 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none rounded-full" 
+                            placeholder="Enter your email address...">
+                    </div>
+                    <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-agri-dark text-white font-bold rounded-xl sm:rounded-full hover:bg-agri-light transition-all duration-300 transform sm:hover:-translate-y-0.5 shadow-md flex items-center justify-center gap-2 whitespace-nowrap group">
+                        Subscribe
+                        <i class="fa-solid fa-paper-plane text-agri-accent group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="success-message" class="hidden max-w-md mx-auto mb-12 -mt-12 bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-xl flex items-center gap-3 animate-fade-in-up">
+                <i class="fa-solid fa-circle-check text-xl"></i>
+                <span class="font-medium">Awesome! You've successfully subscribed.</span>
+            </div>
+
+            <!-- Community Info Section -->
+            <div class="w-full max-w-6xl mx-auto opacity-0 animate-fade-in-up delay-400">
+                <div class="flex items-center justify-center mb-10">
+                    <div class="h-px bg-gray-200 flex-grow max-w-xs"></div>
+                    <span class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Our Growing Network</span>
+                    <div class="h-px bg-gray-200 flex-grow max-w-xs"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-0">
+                    
+
+
+                    <!-- YouTube Card -->
+<div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+    <div class="absolute inset-0 bg-[#FF0000] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+    <div class="w-14 h-14 bg-red-50 text-[#FF0000] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+        <i class="fa-brands fa-youtube"></i>
+    </div>
+    <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 flex items-center">
+        <span class="counter" data-target="5000">0</span>+
+    </h3>
+    <p class="text-gray-500 font-medium mb-6">YouTube Subscribers</p>
+    <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank" 
+       class="w-full py-2.5 rounded-lg border-2 border-[#FF0000] text-[#FF0000] font-semibold hover:bg-[#FF0000] hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+        Subscribe <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </a>
+</div> <!-- ✅ Properly closed -->
+
+                    <!-- LinkedIn Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-[#0A66C2] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 bg-blue-50 text-[#0A66C2] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                        <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="37000">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6">Active Members</p>
+                        <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank" class="w-full py-2.5 rounded-lg border-2 border-[#0A66C2] text-[#0A66C2] font-semibold hover:bg-[#0A66C2] hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                            Connect <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- WhatsApp Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-[#25D366] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 bg-green-50 text-[#25D366] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="10000">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6">Channel Subscribers</p>
+                        <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank" class="w-full py-2.5 rounded-lg border-2 border-[#25D366] text-[#25D366] font-semibold hover:bg-[#25D366] hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                            Join <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Instagram Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <!-- Instagram gradient hint -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] opacity-0 group-hover:opacity-[0.04] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner text-white" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="8000">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6">Followers</p>
+                        <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="w-full py-2.5 rounded-lg border-2 border-pink-500 text-pink-600 font-semibold hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white hover:border-transparent transition-all duration-300 flex justify-center items-center gap-2">
+                            Follow <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Companies Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-agri-dark opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 bg-agri-bg text-agri-dark border border-agri-dark/10 rounded-xl flex items-center justify-center text-2xl mb-5 shadow-inner">
+                            <i class="fa-regular fa-handshake"></i>
+                        </div>
+                        <h3 class="text-4xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="10">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6">Company Collaborations</p>
+                        <a href="/companies/" class="w-full py-2.5 rounded-lg border-2 border-agri-dark text-agri-dark font-semibold hover:bg-agri-dark hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                            Partner <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+   <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info (Spans 4 columns) -->
+                <div class="lg:col-span-4 opacity-0 animate-fade-in-up">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-agri-accent text-agri-dark rounded-lg flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+                    <!-- Social Icons -->
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                     <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank"
+   class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center 
+          hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 
+          transform hover:-translate-y-1 text-gray-300">
+    <i class="fa-brands fa-youtube"></i>
+</a>
+
+                    </div>
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Mentorship</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Webinars</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Opportunities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2 opacity-0 animate-fade-in-up delay-200">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/aboutus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Startups</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Universities</a></li>
+                        <li><a href="/contactus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3 opacity-0 animate-fade-in-up delay-300">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/termsandconditions/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-0 animate-fade-in-up delay-400">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // 2. Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+
+            // 3. Number Counter Animation Logic
+            const counters = document.querySelectorAll('.counter');
+            const speed = 150; // The lower the slower
+
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText.replace(/,/g, ''); // handle numbers that get commas
+                        
+                        // Calculate increment value based on target and speed
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            // Add comma formatting for thousands
+                            counter.innerText = Math.ceil(count + inc).toLocaleString();
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            // Use IntersectionObserver to start animation only when cards are in view
+            const observerOptions = {
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            // Observe the parent container of the grid
+            const statsContainer = document.querySelector('.grid');
+            if(statsContainer) {
+                observer.observe(statsContainer);
+            }
+        });
+    </script>
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe & Community | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            border: '#e2e8f0'    // Subtle border
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out infinite 2s',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom CSS */
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Blobs */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        /* Staggered animation delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        /* Glassmorphism for navbar */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.1);
+        }
+
+        /* Custom gradient for hero text */
+        .text-gradient {
+            background: linear-gradient(135deg, #1B4332, #2D6A4F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Input specific focus styling */
+        .subscribe-input:focus {
+            box-shadow: 0 0 0 4px rgba(233, 196, 106, 0.2);
+            border-color: #E9C46A;
+        }
+
+        /* Stat Card Hover Effects */
+        .stat-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(233, 196, 106, 0.5); /* Accent highlight */
+        }
+
+.toast-container {
+  position: fixed;
+  top: var(--header-height, 80px); /* adjust to your header */
+  right: 1.5rem;
+  z-index: 9999;
+}
+
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape bg-agri-light w-[30rem] h-[30rem] top-0 left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-accent w-[25rem] h-[25rem] bottom-[10%] right-[-5%] animate-float-delayed opacity-20"></div>
+
+   <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                       <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+        <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
+    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        
+        <div class="max-w-4xl w-full mx-auto text-center">
+            
+            <!-- Hero Icon -->
+            <div class="flex justify-center mb-6 opacity-0 animate-fade-in-up">
+                <div class="w-20 h-20 bg-agri-accent/20 text-agri-accent rounded-full flex items-center justify-center text-3xl border border-agri-accent/30 shadow-lg relative">
+                    <div class="absolute inset-0 rounded-full border-2 border-agri-accent animate-pulse-slow opacity-50"></div>
+                    <i class="fa-solid fa-envelope-open-text z-10 text-agri-dark"></i>
+                </div>
+            </div>
+
+            <!-- Hero Text -->
+            <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-6 opacity-0 animate-fade-in-up delay-100 text-gradient leading-tight">
+                Build the future of agriculture with us.
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-gray-600 mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up delay-200 leading-relaxed">
+                Join thousands of students and professionals already accelerating their careers on <span class="font-semibold text-agri-dark">Agriculture Hub</span>. Get exclusive insights, jobs, and networking delivered straight to your inbox.
+            </p>
+{% comment %} <!-- Display messages -->
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %} {% endcomment %}
+
+{% if messages %}
+<div class="fixed top-24 right-6 space-y-4 z-[9999]">
+    {% for message in messages %}
+        <div class="opacity-0 animate-fade-in-up px-6 py-4 rounded-xl shadow-lg border 
+                    transition-transform transform hover:scale-105 duration-300
+                    {% if message.tags == 'success' %}
+                        bg-green-50 border-green-200 text-green-700
+                    {% elif message.tags == 'warning' %}
+                        bg-yellow-50 border-yellow-200 text-yellow-700
+                    {% elif message.tags == 'error' %}
+                        bg-red-50 border-red-200 text-red-700
+                    {% else %}
+                        bg-blue-50 border-blue-200 text-blue-700
+                    {% endif %}">
+            
+            <div class="flex items-center gap-3">
+                {% if message.tags == 'success' %}
+                    <i class="fa-solid fa-circle-check text-green-500 text-lg"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fa-solid fa-triangle-exclamation text-yellow-500 text-lg"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fa-solid fa-circle-xmark text-red-500 text-lg"></i>
+                {% else %}
+                    <i class="fa-solid fa-circle-info text-blue-500 text-lg"></i>
+                {% endif %}
+                <span class="font-semibold">{{ message }}</span>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+            <!-- Subscribe Form -->
+            <div class="max-w-2xl mx-auto bg-white p-2 sm:p-3 rounded-2xl sm:rounded-full shadow-xl border border-gray-100 mb-20 opacity-0 animate-fade-in-up delay-300">
+                <form class="flex flex-col sm:flex-row gap-3" action="{% url "subscribe" %}" method="POST">
+                    {% csrf_token %}
+                    <div class="relative flex-grow flex items-center">
+                        <i class="fa-regular fa-envelope absolute left-5 text-gray-400 text-lg"></i>
+                        <input type="email" required  name="email"
+                            class="subscribe-input w-full pl-12 pr-6 py-4 bg-transparent text-gray-800 placeholder-gray-400 focus:outline-none rounded-full" 
+                            placeholder="Enter your email address...">
+                    </div>
+                    <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-agri-dark text-white font-bold rounded-xl sm:rounded-full hover:bg-agri-light transition-all duration-300 transform sm:hover:-translate-y-0.5 shadow-md flex items-center justify-center gap-2 whitespace-nowrap group">
+                        Subscribe
+                        <i class="fa-solid fa-paper-plane text-agri-accent group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+            </div>
+
+            {% comment %} <!-- Success Message (Hidden by default) -->
+            <div id="success-message" class="hidden max-w-md mx-auto mb-12 -mt-12 bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-xl flex items-center gap-3 animate-fade-in-up">
+                <i class="fa-solid fa-circle-check text-xl"></i>
+                <span class="font-medium">Awesome! You've successfully subscribed.</span>
+            </div> {% endcomment %}
+
+            <!-- Community Info Section -->
+            <div class="w-full max-w-7xl mx-auto opacity-0 animate-fade-in-up delay-400">
+                <div class="flex items-center justify-center mb-10">
+                    <div class="h-px bg-gray-200 flex-grow max-w-xs"></div>
+                    <span class="px-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">Our Growing Network</span>
+                    <div class="h-px bg-gray-200 flex-grow max-w-xs"></div>
+                </div>
+
+                <!-- Note: Adjusted grid to xl:grid-cols-5 to perfectly fit 5 cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 px-4 sm:px-0">
+                    
+                    <!-- YouTube Card -->
+                  <!-- YouTube Card (Whole Card Clickable) -->
+<a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank" 
+   class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center 
+          text-center relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1">
+    
+    <!-- Hover overlay -->
+    <div class="absolute inset-0 bg-[#FF0000]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    <!-- Icon -->
+    <div class="w-14 h-14 bg-red-50 text-[#FF0000] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+        <i class="fa-brands fa-youtube"></i>
+    </div>
+    
+    <!-- Stats -->
+    <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+        <span class="counter" data-target="5000">0</span>+
+    </h3>
+    <p class="text-gray-500 font-medium mb-6 text-sm">YouTube Subscribers</p>
+    
+    <!-- Fake button look (but whole card is clickable) -->
+    <div class="w-full py-2.5 rounded-lg border-2 border-[#FF0000] text-[#FF0000] font-semibold 
+                group-hover:bg-[#FF0000] group-hover:text-white transition-colors duration-300 
+                flex justify-center items-center gap-2">
+        Subscribe <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </div>
+</a>
+
+                    {% comment %} <!-- LinkedIn Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-[#0A66C2] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 bg-blue-50 text-[#0A66C2] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </div>
+                        <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="37000">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6 text-sm">Active Members</p>
+                        <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank" class="w-full py-2.5 rounded-lg border-2 border-[#0A66C2] text-[#0A66C2] font-semibold hover:bg-[#0A66C2] hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                            Connect <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div> {% endcomment %}
+
+
+                    <!-- LinkedIn Card (Whole Card Clickable) -->
+<a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank" 
+   class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center 
+          text-center relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1">
+    
+    <!-- Hover overlay -->
+    <div class="absolute inset-0 bg-[#0A66C2]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    <!-- Icon -->
+    <div class="w-14 h-14 bg-blue-50 text-[#0A66C2] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </div>
+    
+    <!-- Stats -->
+    <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+        <span class="counter" data-target="37000">0</span>+
+    </h3>
+    <p class="text-gray-500 font-medium mb-6 text-sm">Active Members</p>
+    
+    <!-- Fake button look (but whole card is clickable) -->
+    <div class="w-full py-2.5 rounded-lg border-2 border-[#0A66C2] text-[#0A66C2] font-semibold 
+                group-hover:bg-[#0A66C2] group-hover:text-white transition-colors duration-300 
+                flex justify-center items-center gap-2">
+        Connect <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </div>
+</a>
+
+                    {% comment %} <!-- WhatsApp Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-[#25D366] opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 bg-green-50 text-[#25D366] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="10000">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6 text-sm">Channel Subscribers</p>
+                        <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank" class="w-full py-2.5 rounded-lg border-2 border-[#25D366] text-[#25D366] font-semibold hover:bg-[#25D366] hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                            Join <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Instagram Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <!-- Instagram gradient hint -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] opacity-0 group-hover:opacity-[0.04] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner text-white" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="8000">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6 text-sm">Followers</p>
+                        <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="w-full py-2.5 rounded-lg border-2 border-pink-500 text-pink-600 font-semibold hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white hover:border-transparent transition-all duration-300 flex justify-center items-center gap-2">
+                            Follow <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Companies Card -->
+                    <div class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-agri-dark opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300"></div>
+                        <div class="w-14 h-14 bg-agri-bg text-agri-dark border border-agri-dark/10 rounded-xl flex items-center justify-center text-2xl mb-5 shadow-inner">
+                            <i class="fa-regular fa-handshake"></i>
+                        </div>
+                        <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+                            <span class="counter" data-target="10">0</span>+
+                        </h3>
+                        <p class="text-gray-500 font-medium mb-6 text-sm">Collaborations</p>
+                        <a href="/companies/" class="w-full py-2.5 rounded-lg border-2 border-agri-dark text-agri-dark font-semibold hover:bg-agri-dark hover:text-white transition-colors duration-300 flex justify-center items-center gap-2">
+                            Partner <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div> {% endcomment %}
+
+
+                    <!-- WhatsApp Card (Whole Card Clickable) -->
+<a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank"
+   class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center 
+          text-center relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1">
+    
+    <div class="absolute inset-0 bg-[#25D366]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    <div class="w-14 h-14 bg-green-50 text-[#25D366] rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner">
+        <i class="fa-brands fa-whatsapp"></i>
+    </div>
+    
+    <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+        <span class="counter" data-target="10000">0</span>+
+    </h3>
+    <p class="text-gray-500 font-medium mb-6 text-sm">Channel Subscribers</p>
+    
+    <div class="w-full py-2.5 rounded-lg border-2 border-[#25D366] text-[#25D366] font-semibold 
+                group-hover:bg-[#25D366] group-hover:text-white transition-colors duration-300 
+                flex justify-center items-center gap-2">
+        Join <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </div>
+</a>
+
+
+<!-- Instagram Card (Whole Card Clickable) -->
+<a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+   class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center 
+          text-center relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1">
+    
+    <div class="absolute inset-0 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] opacity-0 group-hover:opacity-[0.04] transition-opacity duration-300"></div>
+    
+    <div class="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-5 shadow-inner text-white"
+         style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+        <i class="fa-brands fa-instagram"></i>
+    </div>
+    
+    <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+        <span class="counter" data-target="8000">0</span>+
+    </h3>
+    <p class="text-gray-500 font-medium mb-6 text-sm">Followers</p>
+    
+    <div class="w-full py-2.5 rounded-lg border-2 border-pink-500 text-pink-600 font-semibold 
+                group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 
+                group-hover:text-white group-hover:border-transparent transition-all duration-300 
+                flex justify-center items-center gap-2">
+        Follow <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </div>
+</a>
+
+
+<!-- Companies Card (Whole Card Clickable) -->
+<a href="/companies/" 
+   class="stat-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm flex flex-col items-center 
+          text-center relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1">
+    
+    <div class="absolute inset-0 bg-agri-dark/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    <div class="w-14 h-14 bg-agri-bg text-agri-dark border border-agri-dark/10 rounded-xl flex items-center justify-center text-2xl mb-5 shadow-inner">
+        <i class="fa-regular fa-handshake"></i>
+    </div>
+    
+    <h3 class="text-3xl font-display font-bold text-gray-900 mb-1 flex items-center">
+        <span class="counter" data-target="10">0</span>+
+    </h3>
+    <p class="text-gray-500 font-medium mb-6 text-sm">Collaborations</p>
+    
+    <div class="w-full py-2.5 rounded-lg border-2 border-agri-dark text-agri-dark font-semibold 
+                group-hover:bg-agri-dark group-hover:text-white transition-colors duration-300 
+                flex justify-center items-center gap-2">
+        Partner <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+    </div>
+</a>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+  <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info (Spans 4 columns) -->
+                <div class="lg:col-span-4 opacity-0 animate-fade-in-up">
+                    <div class="flex items-center mb-6">
+                               
+
+<div class="w-10 h-10 bg-agri-accent rounded-lg flex items-center justify-center shadow-md overflow-hidden">
+    <img src="{% static 'Logo.jpeg' %}" alt="Company Logo" class="w-full h-full object-contain">
+</div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+             
+                    <!-- Social Icons -->
+<div class="flex space-x-4">
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+       class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#FF0000] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
+                        <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
+                        <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="/business_news/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2 opacity-0 animate-fade-in-up delay-200">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/aboutus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="/ourstory/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Story</a></li>
+                        <li><a href="/ourvision/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Vision & Mission</a></li>
+                        <li><a href="/contactus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3 opacity-0 animate-fade-in-up delay-300">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/termsandconditions/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="/subscribe/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Subscribe</a></li>
+                               
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-0 animate-fade-in-up delay-400">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                // Toggle icon between bars and times
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // 2. Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+
+            // 3. Number Counter Animation Logic
+            const counters = document.querySelectorAll('.counter');
+            const speed = 150; // The lower the slower
+
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText.replace(/,/g, ''); // handle numbers that get commas
+                        
+                        // Calculate increment value based on target and speed
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            // Add comma formatting for thousands
+                            counter.innerText = Math.ceil(count + inc).toLocaleString();
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            // Use IntersectionObserver to start animation only when cards are in view
+            const observerOptions = {
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            // Observe the parent container of the grid
+            const statsContainer = document.querySelector('.grid');
+            if(statsContainer) {
+                observer.observe(statsContainer);
+            }
+        });
+    </script>
+</body>
+</html>

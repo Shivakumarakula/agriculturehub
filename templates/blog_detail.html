@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog.title }} | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body, Lora for rich text reading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            blue: '#0284c7',     // Ocean Blue
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                        serif: ['Lora', 'serif'], // Added for premium reading experience
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Glassmorphism for navbar */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.05);
+        }
+
+        /* Abstract Background Decor */
+        .bg-orb {
+            position: absolute;
+            filter: blur(90px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Blog Content Formatting for Django linebreaks filter */
+        .blog-body p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #334155;
+            font-size: 1.125rem; /* 18px for great readability */
+        }
+        .blog-body p:first-of-type {
+            font-size: 1.25rem; /* Slightly larger lead paragraph */
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Background Shapes -->
+    <div class="bg-orb bg-agri-light w-[40rem] h-[40rem] top-[-5%] left-[-10%]"></div>
+    <div class="bg-orb bg-agri-blue w-[35rem] h-[35rem] top-[30%] right-[-10%] opacity-10"></div>
+
+    <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+                    <div class="w-10 h-10 bg-agri-dark text-agri-accent rounded-xl flex items-center justify-center text-xl shadow-lg">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-agri-dark font-medium hover:text-agri-light transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-light transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="{% url 'blogs' %}" class="text-agri-light font-bold relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-light transition-all duration-300"></span>
+                    </a>
+                    <a href="#" class="text-agri-dark font-medium hover:text-agri-light transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-light transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-agri-dark font-medium hover:text-agri-light transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-light transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="join.html" class="bg-gradient-to-r from-agri-dark to-agri-light text-white px-6 py-2.5 rounded-full font-medium shadow-lg transform -translate-y-0.5 flex items-center gap-2 hover:shadow-xl transition-all duration-300">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-users text-sm text-agri-accent"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-light focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:bg-gray-50 transition">Home</a>
+                <a href="{% url 'blogs' %}" class="block px-3 py-3 rounded-md text-base font-bold text-agri-light bg-green-50/50 transition">Blogs</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:bg-gray-50 transition">Companies</a>
+                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:bg-gray-50 transition">Business News</a>
+                <a href="join.html" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-24 pb-20 relative z-10 w-full">
+        
+        <!-- Top Back Link -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8 opacity-0 animate-fade-in-up">
+            <a href="{% url 'blogs' %}" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-agri-light transition-colors group">
+                <i class="fa-solid fa-arrow-left-long group-hover:-translate-x-1 transition-transform"></i> Back to Insights
+            </a>
+        </div>
+
+        <article class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Article Header (Title, Summary, Author) -->
+            <header class="mb-10 text-center md:text-left opacity-0 animate-fade-in-up delay-100">
+                
+                <!-- Category Badge -->
+                <div class="mb-5 inline-block">
+                    <span class="px-3.5 py-1.5 bg-green-50 text-agri-light border border-green-100 rounded-lg text-sm font-bold tracking-wide uppercase">
+                        {{ blog.get_category_display }}
+                    </span>
+                </div>
+
+                <!-- Title -->
+                <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.15] mb-6">
+                    {{ blog.title }}
+                </h1>
+
+                <!-- Summary (Lead Paragraph) -->
+                {% if blog.summary %}
+                <p class="text-xl text-gray-500 font-medium leading-relaxed max-w-3xl mb-8 border-l-4 border-agri-accent pl-4 text-left mx-auto md:mx-0">
+                    {{ blog.summary }}
+                </p>
+                {% endif %}
+
+                <!-- Author & Meta Row -->
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 py-4 border-t border-b border-gray-100">
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-agri-bg flex items-center justify-center text-agri-light border border-gray-200 shadow-sm text-lg">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-0.5">Written By</p>
+                            <p class="text-sm font-bold text-gray-900">{{ blog.author }}</p>
+                        </div>
+                    </div>
+
+                    <div class="w-px h-10 bg-gray-200 hidden sm:block"></div>
+
+                    <div class="flex items-center gap-6 text-sm font-medium text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-regular fa-calendar text-agri-light"></i>
+                            <span>{{ blog.published_at|date:"M d, Y" }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-eye text-agri-blue"></i>
+                            <span>{{ blog.views_count }} Views</span>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <!-- Hero Image -->
+            {% if blog.image %}
+            <div class="w-full mb-12 opacity-0 animate-fade-in-up delay-200">
+                <div class="relative w-full aspect-[21/9] md:aspect-[21/9] lg:aspect-[2.5/1] rounded-[2rem] overflow-hidden shadow-xl border border-gray-100">
+                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="absolute inset-0 w-full h-full object-cover">
+                    <!-- Subtle gradient overlay to make it look premium -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Main Content & Sidebar Split -->
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+                
+                <!-- Left Column: The Body Content -->
+                <div class="w-full lg:w-2/3 opacity-0 animate-fade-in-up delay-300">
+                    <!-- The font-serif class applied here transforms the text to Lora -->
+                    <div class="blog-body font-serif">
+                        {{ blog.content|linebreaks }}
+                    </div>
+                    
+                    <!-- Bottom Action -->
+                    <div class="mt-16 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div>
+                            <p class="text-gray-500 font-medium mb-1 text-center sm:text-left">Finished reading?</p>
+                            <h4 class="text-xl font-display font-bold text-gray-900">Explore more insights</h4>
+                        </div>
+                        <a href="{% url 'blogs' %}" class="inline-flex items-center gap-2 px-8 py-3.5 bg-agri-dark text-white font-bold rounded-xl hover:bg-agri-light transition-all duration-300 shadow-md transform hover:-translate-y-1">
+                            Browse All Blogs <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Meta Information Sidebar -->
+                <aside class="w-full lg:w-1/3 opacity-0 animate-fade-in-up delay-300">
+                    <div class="bg-white p-6 sm:p-8 rounded-[2rem] shadow-lg border border-gray-100 sticky top-28">
+                        
+                        <h3 class="font-display text-lg font-bold text-gray-900 mb-6 flex items-center gap-2 border-b border-gray-100 pb-4">
+                            <i class="fa-solid fa-circle-info text-agri-accent"></i> Article Details
+                        </h3>
+                        
+                        <ul class="space-y-5">
+                            
+                            <!-- Tags Section (Parsed by JS) -->
+                            <li>
+                                <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Tags</span>
+                                <!-- Hidden raw data -->
+                                <div id="tags-raw" class="hidden">{{ blog.tags }}</div>
+                                <!-- Target container -->
+                                <div id="tags-container" class="flex flex-wrap gap-2">
+                                    <noscript><span class="text-sm text-gray-600">{{ blog.tags }}</span></noscript>
+                                </div>
+                            </li>
+
+                            <!-- Status -->
+                            <li>
+                                <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Status</span>
+                                {% if blog.is_active %}
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-lg border border-green-100">
+                                        <i class="fa-solid fa-circle text-[8px]"></i> Active
+                                    </span>
+                                {% else %}
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-red-700 text-xs font-bold rounded-lg border border-red-100">
+                                        <i class="fa-solid fa-circle text-[8px]"></i> Inactive
+                                    </span>
+                                {% endif %}
+                            </li>
+
+                            <!-- Source Link -->
+                            {% if blog.source_url %}
+                            <li>
+                                <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Original Source</span>
+                                <a href="{{ blog.source_url }}" target="_blank" class="inline-flex items-center gap-2 text-agri-blue hover:text-agri-dark font-medium transition-colors break-all text-sm">
+                                    <i class="fa-solid fa-link"></i> {{ blog.source_url }}
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            <!-- Last Updated -->
+                            <li>
+                                <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Last Updated</span>
+                                <span class="text-sm font-medium text-gray-700">{{ blog.updated_at|date:"M d, Y h:i A" }}</span>
+                            </li>
+                            
+                        </ul>
+
+                        <!-- Social Share (Optional visual enhancement) -->
+                        <div class="mt-8 pt-6 border-t border-gray-100">
+                            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 text-center">Share this article</span>
+                            <div class="flex justify-center gap-3">
+                                <button class="w-10 h-10 rounded-full bg-blue-50 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </button>
+                                <button class="w-10 h-10 rounded-full bg-green-50 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </button>
+                                <button class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 hover:bg-black hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-4">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-agri-accent text-agri-dark rounded-lg flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight text-white">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agri-light hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-pink-500 hover:to-orange-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Mentorship</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Webinars</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Opportunities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Startups</a></li>
+                        <li><a href="{% url 'companies' %}" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Universities</a></li>
+                        <li><a href="join.html" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Help Center</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+
+            // Dynamic Blog Tags Splitter
+            const rawDataEl = document.getElementById('tags-raw');
+            const container = document.getElementById('tags-container');
+            
+            if (rawDataEl && container) {
+                const text = rawDataEl.textContent || rawDataEl.innerText;
+                if (text.trim() && text.trim() !== "None") {
+                    const tags = text.split(',').map(s => s.trim()).filter(Boolean);
+                    
+                    container.innerHTML = tags.map(tag => 
+                        `<span class="inline-block px-3 py-1.5 bg-gray-50 border border-gray-200 text-gray-600 rounded-lg text-xs font-semibold hover:bg-agri-light hover:text-white hover:border-agri-light transition-colors cursor-pointer shadow-sm">
+                            #${tag}
+                        </span>`
+                    ).join('');
+                } else {
+                    container.innerHTML = `<span class="text-gray-400 italic text-sm">No tags provided.</span>`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
