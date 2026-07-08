@@ -1,5 +1,7 @@
+from django.utils import timezone
 
-
+# 
+# from datetime import timezone
 import email
 from email.message import EmailMessage
 from email.mime import message
@@ -12,8 +14,11 @@ from agrihubproject import settings
 
 # Create your views here.
 
-
+from .models import SiteStats
 def index(request):
+    latest_jobs = Job.objects.filter(is_active=True).order_by("-posted_at")[:3]
+    stats = SiteStats.objects.first()  # assuming one record
+    # print(stats.members)
     # Get the latest active blog
     latest_blog = Blog.objects.filter(is_active=True).order_by("-published_at")[:2]
     # Get the latest active news
@@ -32,6 +37,8 @@ def index(request):
             "latest_blog": latest_blog,
             "latest_news": latest_news,
             "latest_companies": latest_companies,
+            "stats": stats,
+            "latest_jobs": latest_jobs,
         },) 
     # return render(request, 'index.html')
 
@@ -52,8 +59,8 @@ def register(request):
 
 
 
-def contactus(request):
-    return render(request, 'contactus.html')
+# def contactus(request):
+#     return render(request, 'contactus.html')
 
 
 def aboutus(request):
@@ -464,6 +471,8 @@ from django.contrib import messages
 from .models import Subscriber
 
 def subscribe(request):
+    
+    stats = SiteStats.objects.first()  # assuming one record
     if request.method == "POST":
         email = request.POST.get("email")
 
@@ -481,9 +490,54 @@ def subscribe(request):
         return redirect("subscribe")  # replace 'home' with your actual URL name
 
     # If GET request, just show the subscription form
-    return render(request, "subscribe.html")
+    return render(request, "subscribe.html", {"stats": stats})
 
 
+
+
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.conf import settings
+
+def contactus(request):
+    
+    stats = SiteStats.objects.first()  # assuming one record
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+
+        if name and email and subject and message:
+            # Format the email body
+            full_message = f"""
+            New contact form submission:
+
+            Name: {name}
+            Email: {email}
+            Subject: {subject}
+            Message:
+            {message}
+            """
+
+            try:
+                send_mail(
+                    subject=f"[AgricultureHub Contact] {subject}",
+                    message=full_message,
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=[settings.EMAIL_HOST_USER],  # your admin email
+                    fail_silently=False,
+                )
+                messages.success(request, "Your message has been sent successfully!")
+            except Exception as e:
+                messages.error(request, f"Error sending message: {e}")
+        else:
+            messages.error(request, "Please fill in all fields.")
+
+        return redirect("contactus")  # redirect back to contact page
+
+    return render(request, "contactus.html", {"stats": stats})
 
 
 # def user_logout(request):
@@ -505,3 +559,90 @@ def subscribe(request):
 
 
 
+
+
+# # views.py
+# from django.shortcuts import render
+# from .models import Job
+
+# def jobs_list(request):
+#     jobs = Job.objects.filter(is_active=True).order_by("-posted_at")
+#     return render(request, "jobs.html", {"jobs": jobs})
+
+
+
+
+# views.py
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Job
+
+# def jobs_list(request):
+#     today = timezone.now().date()   # ✅ Correct way
+#     # Get query parameters
+#     query = request.GET.get("q", "")
+#     job_type = request.GET.get("job_type", "")
+
+#     # Start with active jobs only
+#     jobs = Job.objects.filter(is_active=True)
+
+#     # Apply keyword search
+#     if query:
+#         jobs = jobs.filter(
+#             Q(company__icontains=query) |
+#             Q(designation__icontains=query) |
+#             Q(location__icontains=query) |
+#             Q(qualifications__icontains=query) |
+#             Q(experience__icontains=query) |
+#             Q(description__icontains=query) |
+#             Q(eligibility_notes__icontains=query) |
+#             Q(package__icontains=query)
+#         )
+
+#     # Apply job type filter
+#     if job_type:
+#         jobs = jobs.filter(job_type=job_type)
+
+#     # Order by latest posted
+#     jobs = jobs.order_by("-posted_at")
+
+#     return render(request, "jobs.html", {"jobs": jobs, "today": today})
+
+
+
+from django.shortcuts import render
+from django.db.models import Q
+from django.utils import timezone
+from .models import Job
+
+def jobs_list(request):
+    today = timezone.now().date()
+    query = request.GET.get("q", "")
+    job_type = request.GET.get("job_type", "")
+
+    jobs = Job.objects.filter(is_active=True)
+
+    # Apply keyword search (split into words)
+    if query:
+        words = query.split()
+        q_objects = Q()
+        for word in words:
+            q_objects |= (
+                Q(company__icontains=word) |
+                Q(designation__icontains=word) |
+                Q(location__icontains=word) |
+                Q(qualifications__icontains=word) |
+                Q(experience__icontains=word) |
+                Q(description__icontains=word) |
+                Q(eligibility_notes__icontains=word) |
+                Q(package__icontains=word)
+            )
+        jobs = jobs.filter(q_objects)
+
+    # Apply job type filter
+    if job_type:
+        jobs = jobs.filter(job_type=job_type)
+
+    jobs = jobs.order_by("-posted_at")
+
+    return render(request, "jobs.html", {"jobs": jobs, "today": today})

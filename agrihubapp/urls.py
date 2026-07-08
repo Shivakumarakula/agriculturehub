@@ -36,7 +36,10 @@ urlpatterns = [
     path("companies/<int:pk>/", views.company_detail, name="company_detail"),
 path("business_news/<int:pk>/", views.news_detail, name="news_detail"),
 path("blogs/<int:pk>/", views.blog_detail, name="blog_detail"),
+path("jobs_list/", views.jobs_list, name="jobs_list"),
 
+
+# path('contact', views.contact, name='contact'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

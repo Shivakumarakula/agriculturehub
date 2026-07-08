@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&*p3fp%07m38yz*3g&d5z5aw3f*-8u*4stk@pp!%b_i-a8_w$+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False       #changed to false for production....but for development it is true
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'localhost', '127.0.0.1']
 
 
 
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
     'agrihubapp',
 ]
 
@@ -118,6 +120,16 @@ EMAIL_HOST_PASSWORD = 'szke cwtw bvhv ikzx'
 
 
 
+
+# Cloudinary configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'erzdp57y',
+    'API_KEY': '888453654969887',
+    'API_SECRET': 'TwM6eBU614-JH4bSBr0cuwcqp1s'
+}
+
+# Default file storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Password validation

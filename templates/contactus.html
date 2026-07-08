@@ -128,34 +128,45 @@
         
         .social-card-email:hover { background-color: #fff9eb; border-color: #E9C46A; }
         .social-card-email:hover i { color: #E9C46A; }
+
+        
+.toast-container {
+  position: fixed;
+  top: var(--header-height, 80px); /* adjust to your header */
+  right: 1.5rem;
+  z-index: 9999;
+}
     </style>
 </head>
+
+
 <body class="font-sans antialiased min-h-screen flex flex-col relative">
 
-    <!-- Background Animated Shapes -->
-    <div class="bg-shape bg-agri-light w-[40rem] h-[40rem] top-0 left-[-15%] animate-float"></div>
-    <div class="bg-shape bg-agri-accent w-[30rem] h-[30rem] bottom-[10%] right-[-10%] animate-float-delayed opacity-20"></div>
-
     <!-- Header -->
-    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+   <header class="fixed w-full top-0 z-50 transition-all duration-300 bg-gradient-to-r from-green-100 via-green-50 to-white">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                         <!-- Logo -->
+                <!-- Logo -->
 <div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
     <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
         <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
     </div>
-                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
-                </div>
+    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+</div>
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                    <a href="/" class="text-agri-dark font-bold hover:text-agri-accent transition duration-300 relative group">
                         Home
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-accent transition-all duration-300"></span>
                     </a>
                     <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/jobs_list/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Jobs
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
@@ -166,12 +177,17 @@
                         Business News
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                    <a href="/services/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Our Services
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Login
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
-                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium shadow-lg transform -translate-y-0.5 flex items-center gap-2 border-2 border-agri-accent">
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
                         <span>Join Community</span>
-                        <i class="fa-solid fa-users text-sm text-agri-accent"></i>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
                     </a>
                 </nav>
 
@@ -187,19 +203,56 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
-                <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-bold text-agri-accent bg-gray-50 transition">Home</a>
                 <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/jobs_list/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Jobs</a>
+                
                 <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
                 <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
-                <a href="/login/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-agri-accent border border-agri-accent shadow-md">Login</a>
-                <a href="/contactus/" class="block px-3 py-3 mt-2 text-center rounded-xl text-base font-medium bg-agri-dark text-white border border-agri-accent shadow-md">Join Community</a>
+                <a href="/services/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Our Services</a>
+                   
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex flex-col items-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        
+   <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full 
+             bg-gradient-to-b from-green-100 via-white to-green-100">
+
+           <!-- Stylish feedback messages -->
+
+{% if messages %}
+<div class="fixed top-24 right-6 space-y-4 z-[9999]">
+    {% for message in messages %}
+        <div class="opacity-0 animate-fade-in-up px-6 py-4 rounded-xl shadow-lg border 
+                    transition-transform transform hover:scale-105 duration-300
+                    {% if message.tags == 'success' %}
+                        bg-green-50 border-green-200 text-green-700
+                    {% elif message.tags == 'warning' %}
+                        bg-yellow-50 border-yellow-200 text-yellow-700
+                    {% elif message.tags == 'error' %}
+                        bg-red-50 border-red-200 text-red-700
+                    {% else %}
+                        bg-blue-50 border-blue-200 text-blue-700
+                    {% endif %}">
+            
+            <div class="flex items-center gap-3">
+                {% if message.tags == 'success' %}
+                    <i class="fa-solid fa-circle-check text-green-500 text-lg"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fa-solid fa-triangle-exclamation text-yellow-500 text-lg"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fa-solid fa-circle-xmark text-red-500 text-lg"></i>
+                {% else %}
+                    <i class="fa-solid fa-circle-info text-blue-500 text-lg"></i>
+                {% endif %}
+                <span class="font-semibold">{{ message }}</span>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
         <!-- Hero Section (Top Middle Aligned) -->
         <div class="max-w-4xl w-full mx-auto text-center mb-16">
             
@@ -240,7 +293,8 @@
                     <p class="text-gray-500 text-sm">Have a question or want to collaborate? Reach out to our team.</p>
                 </div>
 
-                <form class="space-y-5" action="#" method="POST" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.remove('hidden');">
+                <form class="space-y-5" action="#" method="POST" action="{% url 'contactus' %}">
+                    {% csrf_token %}
                     
                     <!-- Name Field -->
                     <div>
@@ -249,7 +303,7 @@
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i class="fa-regular fa-user text-gray-400"></i>
                             </div>
-                            <input type="text" id="name" required 
+                            <input type="text" id="name" required name="name"
                                 class="floating-input appearance-none block w-full pl-11 pr-3 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none sm:text-sm bg-gray-50 focus:bg-white" 
                                 placeholder="Your full name">
                         </div>
@@ -262,7 +316,7 @@
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i class="fa-regular fa-envelope text-gray-400"></i>
                             </div>
-                            <input type="email" id="email" required 
+                            <input type="email" id="email" required name="email"
                                 class="floating-input appearance-none block w-full pl-11 pr-3 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none sm:text-sm bg-gray-50 focus:bg-white" 
                                 placeholder="you@example.com">
                         </div>
@@ -275,7 +329,7 @@
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <i class="fa-regular fa-comment-dots text-gray-400"></i>
                             </div>
-                            <input type="text" id="subject" required 
+                            <input type="text" id="subject" required name="subject"
                                 class="floating-input appearance-none block w-full pl-11 pr-3 py-3 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none sm:text-sm bg-gray-50 focus:bg-white" 
                                 placeholder="How can we help you?">
                         </div>
@@ -284,16 +338,15 @@
                     <!-- Message Field -->
                     <div>
                         <label for="message" class="block text-sm font-medium text-gray-700 mb-1.5">Message</label>
-                        <textarea id="message" required 
+                        <textarea id="message" required  name="message" 
                             class="floating-input appearance-none block w-full p-4 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none sm:text-sm bg-gray-50 focus:bg-white" 
                             placeholder="Write your message here..."></textarea>
                     </div>
 
                     <!-- Success Message (Hidden by default) -->
-                    <div id="form-success" class="hidden bg-green-50 text-green-700 p-4 rounded-xl flex items-start gap-3 text-sm">
-                        <i class="fa-solid fa-circle-check mt-0.5"></i>
-                        <span>Thank you! Your message has been sent successfully. We will get back to you soon.</span>
-                    </div>
+                    
+                       
+   
 
                     <!-- Send Button -->
                     <div class="pt-2">
@@ -302,6 +355,8 @@
                             <i class="fa-solid fa-paper-plane text-agri-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                         </button>
                     </div>
+                 
+                
                 </form>
             </div>
 
@@ -398,18 +453,24 @@
 
                     <!-- Address & Phone -->
                     <div class="flex-grow space-y-3">
-                        <h3 class="font-display text-2xl font-bold text-white">Our Headquarters</h3>
+                        <h3 class="font-display text-2xl font-bold text-white">Our Contact</h3>
                         <div class="flex items-start gap-3 text-gray-300">
                             <i class="fa-solid fa-building mt-1 text-agri-accent"></i>
                             <p class="text-base leading-relaxed">
-                                Agriculture Hub Innovations Pvt Ltd.<br>
+                                Agriculture Hub<br>
                                 T1-321 8incline Colony<br>
                                 Ramagundam, Telangana 505208, India
+    
                             </p>
                         </div>
                         <div class="flex items-center gap-3 text-gray-300 pt-2">
                             <i class="fa-solid fa-phone text-agri-accent"></i>
-                            <p class="text-base font-medium">+91 79930 02056  <span class="mx-2 text-white/30">|</span>  +91 79930 02056</p>
+                            <p class="text-base font-medium">+91 79930 02056  <span class="mx-2 text-white/30">|</span>  +91 80968 75764</p>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-gray-300 pt-2">
+                            <i class="fa-solid fa-envelope text-agri-accent"></i>
+                            <a href="mailto:agriculturehubonline@gmail.com"  class="text-base hover:text-agri-accent transition-colors">agriculturehubonline@gmail.com</a>
                         </div>
                     </div>
 
@@ -423,6 +484,67 @@
                 </div>
             </div>
         </div>
+
+
+
+
+        <!-- 4. Our Community Stats -->
+<section class="my-24 bg-white text-gray-900 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 ">
+        <div class="text-center mb-12 reveal">
+            <span class="text-agri-accent font-bold tracking-widest uppercase text-sm mb-2 block">Impact</span>
+            <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Our Growing Community</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Join the fastest-growing network of agriculture professionals in India.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12 mb-12" id="stats-container">
+            <!-- Stat 1 -->
+            <div class="text-center reveal">
+                <div class="text-4xl md:text-5xl font-display font-bold text-agri-accent mb-2 flex justify-center items-center">
+                    <span class="counter" data-target="{{ stats.students }}">0</span>+
+                </div>
+                <p class="text-sm md:text-base text-gray-700 font-medium">Students</p>
+            </div>
+            <!-- Stat 2 -->
+            <div class="text-center reveal delay-100">
+                <div class="text-4xl md:text-5xl font-display font-bold text-agri-accent mb-2 flex justify-center items-center">
+                    <span class="counter" data-target="{{ stats.partners }}">0</span>+
+                </div>
+                <p class="text-sm md:text-base text-gray-700 font-medium">Partners</p>
+            </div>
+            <!-- Stat 3 -->
+            <div class="text-center reveal delay-200">
+                <div class="text-4xl md:text-5xl font-display font-bold text-agri-accent mb-2 flex justify-center items-center">
+                    <span class="counter" data-target="{{ stats.linkedin_followers }}">0</span>+
+                </div>
+                <p class="text-sm md:text-base text-gray-700 font-medium">LinkedIn Community</p>
+            </div>
+            <!-- Stat 4 -->
+            <div class="text-center reveal delay-300">
+                <div class="text-4xl md:text-5xl font-display font-bold text-agri-accent mb-2 flex justify-center items-center">
+                    <span class="counter" data-target="{{ stats.instagram_followers }}">0</span>+
+                </div>
+                <p class="text-sm md:text-base text-gray-700 font-medium">Instagram Community</p>
+            </div>
+        </div>
+
+        <!-- Minor Stats Row -->
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 mt-4 pt-8 border-t border-gray-200 reveal delay-400">
+            <div class="text-center">
+                <span class="text-2xl font-bold text-agri-accent"><span class="counter" data-target="{{ stats.webinars }}">0</span>+</span>
+                <span class="text-sm text-gray-600 ml-2">Webinars</span>
+            </div>
+            <div class="text-center">
+                <span class="text-2xl font-bold text-agri-accent"><span class="counter" data-target="{{ stats.youtube_followers }}">0</span>+</span>
+                <span class="text-sm text-gray-600 ml-2">YouTube Community</span>
+            </div>
+            <div class="text-center">
+                <span class="text-2xl font-bold text-agri-accent"><span class="counter" data-target="{{ stats.whatsapp_followers }}">0</span>+</span>
+                <span class="text-sm text-gray-600 ml-2">WhatsApp Community</span>
+            </div>
+        </div>
+    </div>
+</section>
 
     </main>
 
@@ -482,6 +604,7 @@
                 <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
                     <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
                     <ul class="space-y-3">
+                          <li><a href="/jobs_list/" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
                         <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
                         <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
                         <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
@@ -553,6 +676,43 @@
                     navbar.classList.remove('shadow-md');
                 }
             });
+
+
+            // --- Number Counter Animation Logic ---
+            const counters = document.querySelectorAll('.counter');
+            const speed = 150; // The lower the slower
+
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText.replace(/,/g, ''); 
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc).toLocaleString();
+                            setTimeout(updateCount, 15);
+                        } else {
+                            counter.innerText = target.toLocaleString();
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const statsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            const statsContainer = document.getElementById('stats-container');
+            if(statsContainer) {
+                statsObserver.observe(statsContainer);
+            }
         });
     </script>
 </body>

@@ -122,7 +122,7 @@
             overflow: hidden;
         }
     </style>
-</head>
+{% comment %} </head>
 <body class="font-sans antialiased min-h-screen flex flex-col relative">
 
     <!-- Animated Background Shapes -->
@@ -151,12 +151,20 @@
                         Blogs
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
+                    <a href="/jobs_list/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Jobs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                     <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Companies
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/services/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Our Services
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
@@ -183,17 +191,97 @@
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
                 <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
                 <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                 <a href="/jobs_list/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Jobs</a>
+                
                 <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
                 <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                 <a href="/services/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Our Services</a>
+                  
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header> {% endcomment %}
+
+    
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+        <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
+    </div>
+    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+</div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-bold hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-accent transition-all duration-300"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/jobs_list/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Jobs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/services/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Our Services
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-bold text-agri-accent bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/jobs_list/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Jobs</a>
+                
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/services/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Our Services</a>
+                   
                 <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
                 <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
             </div>
         </div>
     </header>
+<main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full bg-gradient-to-b from-green-100 via-white to-green-100">
 
-    <main class="flex-grow pt-32 pb-24 relative z-10 w-full overflow-hidden">
-        
-        <!-- Page Header -->
+        {% comment %} <!-- Page Header -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center opacity-0 animate-fade-in-up">
             <span class="text-agri-accent font-bold tracking-widest uppercase text-sm mb-2 block">What We Offer</span>
             <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -202,8 +290,36 @@
             <p class="text-gray-500 max-w-2xl mx-auto text-lg">
                 Discover a comprehensive suite of tools, networks, and opportunities designed to accelerate your growth in the modern agricultural sector.
             </p>
+            <div class="mt-10">
+        <a href="/contactus/" 
+           class="inline-block px-6 py-3 bg-agri-accent text-white font-semibold rounded-full shadow-md hover:bg-agri-light transition-colors">
+           Contact Us
+        </a>
+    </div>
             <div class="h-1.5 w-24 bg-agri-light mx-auto rounded-full mt-8"></div>
-        </div>
+            <!-- Contact Us Button -->
+    
+        </div> {% endcomment %}
+
+        <!-- Page Header -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center opacity-0 animate-fade-in-up">
+    <span class="text-agri-accent font-bold tracking-widest uppercase text-sm mb-2 block">What We Offer</span>
+    <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        Our <span class="text-gradient">Services</span>
+    </h1>
+    <p class="text-gray-500 max-w-2xl mx-auto text-lg">
+        We provide a complete range of professional services listed below, designed to support students, researchers, innovators, and institutions.
+    </p>
+    <div class="h-1.5 w-24 bg-agri-light mx-auto rounded-full mt-8"></div>
+
+    <!-- Contact Us Button -->
+    <div class="mt-10">
+        <a href="/contactus/" 
+           class="inline-block px-6 py-3 bg-agri-accent text-white font-semibold rounded-full shadow-md hover:bg-agri-light transition-colors">
+           Contact Us
+        </a>
+    </div>
+</div>
 
         <!-- Services Grid -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -212,172 +328,328 @@
                 <!-- Service 1 (Teal Theme) -->
                 <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-teal-500 shadow-lg group relative">
                     <div class="absolute inset-0 bg-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/e6/34/88/e6348825e22dc5ec0f0390613c4c5837.jpg" alt="Career guidance" class="w-full h-full object-cover">
+                    <div class="relative overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/1200x/e6/34/88/e6348825e22dc5ec0f0390613c4c5837.jpg" alt="Career guidance" class="w-auto h-auto object-contain">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-teal-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🌱</div>
                     </div>
                     <div class="p-6 relative z-10">
                         <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">Career Guidance & Mentorship</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Expert mentorship and personalized roadmaps to accelerate your professional journey in agriculture.</p>
+                        <p class="text-gray-600 text-sm  leading-relaxed">Expert mentorship and personalized roadmaps to accelerate your professional journey in agriculture.</p>
                     </div>
                 </div>
 
-                <!-- Service 2 (Blue Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-blue-500 shadow-lg group relative" style="transition-delay: 100ms;">
-                    <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/736x/60/a7/fe/60a7fefbc932da5ddc05d488dc3ccda4.jpg" alt="Jobs and Internships" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-blue-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">💼</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-500 transition-colors">Jobs & Internship Opportunities</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Access exclusive job postings and high-quality internships from top industry leaders globally.</p>
-                    </div>
-                </div>
-
+               
                 <!-- Service 3 (Orange Theme) -->
                 <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-orange-500 shadow-lg group relative" style="transition-delay: 200ms;">
                     <div class="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/736x/74/f1/5e/74f15e64a5a103e8c002258039ea8af3.jpg" alt="Startup Awareness" class="w-full h-full object-cover">
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/736x/74/f1/5e/74f15e64a5a103e8c002258039ea8af3.jpg" alt="Startup Awareness" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://truthonthemarket.com/wp-content/uploads/2025/07/shutterstock_1950564259.jpg" alt="Career guidance" class="w-auto h-auto object-contain">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-orange-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🚀</div>
                     </div>
                     <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-500 transition-colors">Startup & Entrepreneurship</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Cultivate your business ideas with our awareness programs and agritech innovation resources.</p>
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-500 transition-colors">Patent & Innovation Support </h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Expert drafting, documentation, and publication to protect and showcase your ideas.</p>
                     </div>
                 </div>
 
-                <!-- Service 4 (Purple Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-purple-500 shadow-lg group relative" style="transition-delay: 300ms;">
-                    <div class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/736x/b9/a7/c7/b9a7c7e2d3b13aec3bc16bcd3e8d54fa.jpg" alt="Industry Networking" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-purple-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🤝</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-500 transition-colors">Industry Networking</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Connect with peers, academics, and corporate leaders to build a powerful professional network.</p>
-                    </div>
-                </div>
-
-                <!-- Service 5 (Red Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-red-500 shadow-lg group relative">
-                    <div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/d0/d1/41/d0d14152a7820337528e642d1ace8b5d.jpg" alt="Skill Development" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-red-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📚</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-red-500 transition-colors">Skill Development</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Upskill through targeted workshops, certified courses, and interactive modern webinars.</p>
-                    </div>
-                </div>
+                
 
                 <!-- Service 6 (Cyan Theme) -->
                 <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-cyan-500 shadow-lg group relative" style="transition-delay: 100ms;">
                     <div class="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/736x/a4/44/b3/a444b3ab1b63161302c8eea710f35d9e.jpg" alt="Global Opportunities" class="w-full h-full object-cover">
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/736x/a4/44/b3/a444b3ab1b63161302c8eea710f35d9e.jpg" alt="Global Opportunities" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://www.customerservice.ae/wp-content/uploads/2015/04/Customer-Service-Workshop.jpg" alt="Career guidance" class="w-auto h-auto object-contain">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-cyan-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🌍</div>
                     </div>
                     <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-cyan-500 transition-colors">Global Opportunities</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Explore horizons beyond borders with international scholarships and horticulture placements.</p>
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-cyan-500 transition-colors">Workshops & Training</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Hands‑on sessions on research writing, patents, and innovation practices.</p>
                     </div>
                 </div>
 
                 <!-- Service 7 (Emerald Green Theme) -->
                 <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-emerald-500 shadow-lg group relative" style="transition-delay: 200ms;">
                     <div class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/bb/16/39/bb163971b40eadff6200c6ea8aead27e.jpg" alt="Agriculture Education" class="w-full h-full object-cover">
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="" alt="Agriculture Education" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/1200x/bb/16/39/bb163971b40eadff6200c6ea8aead27e.jpg" alt="Career guidance" class="w-auto h-auto object-contain">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-emerald-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🌾</div>
                     </div>
                     <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-500 transition-colors">Agriculture Education</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Empowering minds with modern curriculum and practical knowledge bridging the academic gap.</p>
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-500 transition-colors">Academic Mentorship</h3>
+                        <p class="text-gray-600 text-sm  leading-relaxed">Personalized UG, PG, and PhD guidance to accelerate academic success.</p>
                     </div>
                 </div>
 
-                <!-- Service 8 (Lime/Neon Green Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-lime-500 shadow-lg group relative" style="transition-delay: 300ms;">
-                    <div class="absolute inset-0 bg-lime-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/0b/78/c0/0b78c0b7d280c4ffc10b6ba1706e6d33.jpg" alt="Agritech Innovation" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-lime-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🚜</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-lime-600 transition-colors">Agritech Innovation</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Fostering technological advancements, smart farming techniques, and sustainable practices.</p>
-                    </div>
-                </div>
+             
 
-                <!-- Service 9 (Gold/Yellow Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-yellow-500 shadow-lg group relative">
-                    <div class="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/c7/6f/9d/c76f9db4d7f9f76c767ece6f3175dac8.jpg" alt="Entrepreneurship" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-yellow-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">💡</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors">Entrepreneurship</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Incubating ideas, supporting agribusiness startups, and cultivating next-gen agri-founders.</p>
-                    </div>
-                </div>
-
-                <!-- Service 10 (Indigo Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-indigo-500 shadow-lg group relative" style="transition-delay: 100ms;">
-                    <div class="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/736x/c0/69/97/c069971e46339ba7e56c54a951cc61d9.jpg" alt="International Career" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-indigo-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🌍</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">International Careers</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Unlocking global opportunities, cross-border internships, and worldwide career advancements.</p>
-                    </div>
-                </div>
-
-                <!-- Service 11 (Pink Theme) -->
-                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-pink-500 shadow-lg group relative" style="transition-delay: 200ms;">
-                    <div class="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/55/d8/aa/55d8aa645be8010850dd957115340d20.jpg" alt="Industry Academia Collaboration" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-pink-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🤝</div>
-                    </div>
-                    <div class="p-6 relative z-10">
-                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-pink-600 transition-colors">Industry–Academia</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Creating seamless collaboration channels between research institutions and corporate leaders.</p>
-                    </div>
-                </div>
-
+              
+               
                 <!-- Service 12 (Amber Theme) -->
                 <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-amber-500 shadow-lg group relative" style="transition-delay: 300ms;">
                     <div class="absolute inset-0 bg-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
-                    <div class="relative h-48 overflow-hidden z-10">
-                        <img src="https://i.pinimg.com/1200x/e2/1b/fb/e21bfbd936248db747415055e531fa6c.jpg" alt="Digital Growth" class="w-full h-full object-cover">
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/1200x/e2/1b/fb/e21bfbd936248db747415055e531fa6c.jpg" alt="Digital Growth" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/1200x/e2/1b/fb/e21bfbd936248db747415055e531fa6c.jpg" alt="Career guidance" class="w-auto h-auto object-contain">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-amber-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📈</div>
                     </div>
                     <div class="p-6 relative z-10">
                         <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">Digital Growth</h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">Driving digital transformation and providing robust growth strategies for modern agribusinesses.</p>
+                        <p class="text-gray-600 text-sm  leading-relaxed">Driving digital transformation and providing robust growth strategies for modern agribusinesses.</p>
                     </div>
                 </div>
 
+     <!-- Service 5 (Red Theme) -->
+                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-red-500 shadow-lg group relative">
+                    <div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="" alt="Skill Development" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://wordscloud.in/wp-content/uploads/2023/07/Online-article-amico-768x768.png" alt="Career guidance" class="w-auto h-auto object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-red-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📚</div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-red-500 transition-colors">Articles & Technical Content</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Clear, structured academic and professional content tailored to your audience.</p>
+                    </div>
+                </div>
+
+                <!-- Service: Resume Writing -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-teal-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://hindco.com/wp-content/uploads/2026/05/resume_writing.png" alt="Resume Writing" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-teal-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📄</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-teal-600 transition-colors">Resume Writing</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Concise, achievement‑focused resumes that highlight your strengths.</p>
+  </div>
+</div>
+
+ <!-- Service 2 (Blue Theme) -->
+                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-blue-500 shadow-lg group relative" style="transition-delay: 100ms;">
+                    <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/736x/60/a7/fe/60a7fefbc932da5ddc05d488dc3ccda4.jpg" alt="Jobs and Internships" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/736x/60/a7/fe/60a7fefbc932da5ddc05d488dc3ccda4.jpg" alt="Career guidance" class="w-auto h-auto object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-blue-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">💼</div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-500 transition-colors">Jobs & Internship Opportunities</h3>
+                        <p class="text-gray-600 text-sm  leading-relaxed">Access exclusive job postings and high-quality internships from top industry leaders globally.</p>
+                    </div>
+                </div>
+<!-- Service: Email Marketing -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-pink-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI9QAIfF2n0cty96hpnX5BCHtPawtKXgHipfH4gH-LELuXJvtldsJizfwC&s=10" alt="Email Marketing" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-pink-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📧</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-pink-600 transition-colors">Email Marketing</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Targeted campaigns to engage audiences and boost conversions.</p>
+  </div>
+</div>
+
+<!-- Service: Graphic Design -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-purple-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://cdn.colorexpertsbd.com/wp-content/uploads/2023/12/Art-and-Illustration-for-Graphic-Design-Example-3.webp" alt="Graphic Design" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-purple-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🎨</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">Graphic Design</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Clean, professional visuals that enhance brand identity.</p>
+  </div>
+</div>
+
+<!-- Service: Content Strategy -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-indigo-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://www.adobe.com/express/learn/blog/media_1955e989576d1dd44c06c9c77f575a149f79d9544.png?width=1200&format=pjpg&optimize=medium" alt="Content Strategy" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-indigo-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📝</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">Content Strategy</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Structured plans to deliver consistent, impactful messaging.</p>
+  </div>
+</div>
+
+<!-- Service: Human Resources -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-red-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://miro.medium.com/v2/resize:fit:1400/1*aoz09QCaLMxwTZ5osWuItw.jpeg" alt="Human Resources" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-red-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">👥</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">Human Resources</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Streamlined HR support for recruitment, onboarding, and management.</p>
+  </div>
+</div>
+
+<!-- Service: Blogging -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-yellow-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://www.chitkara.edu.in/blogs/wp-content/uploads/2023/09/Blogging-in-Digital-Marketing.jpg" alt="Blogging" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-yellow-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">✍️</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors">Blogging</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Engaging posts that inform, inspire, and build authority.</p
+    </div>
+</div>
+
+
+
             </div>
+
+
+            <!-- Service: Copywriting -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-orange-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF2WUeHHb3HBnH6BlelDFcJO2mxvO1Rxe0Sn2FQ6ntIbmprxYJjZsW7VR4&s=10" alt="Copywriting" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-orange-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">✒️</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">Copywriting</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Compelling words that drive action and strengthen brand voice.</p>
+  </div>
+</div>
+
+
+<!-- Service 4 (Purple Theme) -->
+                <div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-purple-500 shadow-lg group relative" style="transition-delay: 300ms;">
+                    <div class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+                    {% comment %} <div class="relative h-48 overflow-hidden z-10">
+                        <img src="https://i.pinimg.com/736x/b9/a7/c7/b9a7c7e2d3b13aec3bc16bcd3e8d54fa.jpg" alt="Industry Networking" class="w-full h-full object-cover"> {% endcomment %}
+                        <div class="relative overflow-hidden z-10">
+                        <img src="https://www.bibguru.com/blog/img/research-papers-1400x700.png?v=943" alt="Career guidance" class="w-auto h-auto object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-purple-500 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🤝</div>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-500 transition-colors">Research Papers</h3>
+                        <p class="text-gray-600 text-sm  leading-relaxed">Professional writing, editing, and journal submission guidance for impactful publications.</p>
+                    </div>
+                </div>
+
+           
+
+<!-- Service: Social Media Marketing -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-cyan-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://a.storyblok.com/f/292526246015519/0/e2696e0f90/qf-blog_social-media-marketing_-complete-guide-for-advertisers-2024_1920x1080.jpg" alt="Social Media Marketing" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-cyan-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📱</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-cyan-600 transition-colors">Social Media Marketing</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Creative strategies to grow communities and maximize engagement.</p>
+  </div>
+</div>
+
+
+<!-- Service: Digital Marketing -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-blue-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://codingwithiitians.com/wp-content/uploads/2025/07/Importance-of-Digital-Marketing.jpg" alt="Digital Marketing" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-blue-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📊</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Digital Marketing</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Smart online campaigns to grow visibility and reach.</p>
+  </div>
+</div>
+
+
+
+<!-- Service: Product Marketing -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-green-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://res.cloudinary.com/jerrick/image/upload/v1733583147/6754612b4459dd001d681c6d.jpg" alt="Product Marketing" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-green-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📦</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">Product Marketing</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Strategic promotion to position products effectively and drive customer adoption.</p>
+  </div>
+</div>
+
+<!-- Service: Lead Generation -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-sky-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-sky-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwKOvOsWI2oRPY-pZueKgs_pFCx_QrWoQo7eG2WHHzYUHbCTbkKWdv0l8&s=10" alt="Lead Generation" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-sky-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🎯</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">Lead Generation</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Effective strategies to capture prospects and convert them into loyal customers.</p>
+  </div>
+</div>
+
+<!-- Service: Event Marketing -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-violet-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://www.pcma.org/wp-content/uploads/2018/12/event-marketing.jpg" alt="Event Marketing" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-violet-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">🎉</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-violet-600 transition-colors">Event Marketing</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Engaging campaigns to promote events and maximize audience participation.</p>
+  </div>
+</div>
+
+<!-- Service: Advertising -->
+<div class="service-card reveal bg-white rounded-[2rem] overflow-hidden border-b-4 border-rose-500 shadow-lg group relative">
+  <div class="absolute inset-0 bg-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+  <div class="relative overflow-hidden z-10">
+    <img src="https://static-global.zingfront.com/bs/nbs-res/image/blog/advertising-1024x576__40b656a26114ae94e58c99bbeb0defa4.webp" alt="Advertising" class="w-auto h-auto object-contain mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+    <div class="absolute bottom-4 left-6 w-12 h-12 bg-white text-rose-600 rounded-2xl flex items-center justify-center text-2xl shadow-xl">📢</div>
+  </div>
+  <div class="p-6 relative z-10">
+    <h3 class="font-display text-xl font-bold text-gray-900 mb-3 group-hover:text-rose-600 transition-colors">Advertising</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">Creative ad campaigns that capture attention and drive measurable results.</p>
+  </div>
+</div>
+
         </div>
     </main>
   <!-- Footer Section -->
@@ -436,6 +708,7 @@
                 <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
                     <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
                     <ul class="space-y-3">
+                          <li><a href="/jobs_list/" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
                         <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
                         <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
                         <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>

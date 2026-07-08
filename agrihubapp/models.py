@@ -210,3 +210,79 @@ class Blog(models.Model):
                 link=f"https://http://127.0.0.1:8000/{link}",
                 recipients=recipients
             )
+
+
+
+
+
+# models.py
+from django.db import models
+
+class SiteStats(models.Model):
+    members = models.PositiveIntegerField(default=0)
+    students = models.PositiveIntegerField(default=0)
+    partners = models.PositiveIntegerField(default=0)
+    linkedin_followers = models.PositiveIntegerField(default=0)
+    instagram_followers = models.PositiveIntegerField(default=0)
+    youtube_followers = models.PositiveIntegerField(default=0)
+    whatsapp_followers = models.PositiveIntegerField(default=0)
+    webinars = models.PositiveIntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Stats (updated {self.updated_at})"
+
+
+
+
+
+class Job(models.Model):
+    company = models.CharField(max_length=255)
+    designation = models.CharField(max_length=255)
+    location = models.TextField()
+    qualifications = models.TextField(blank=True, null=True)
+    experience = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    
+    job_type = models.CharField(
+        max_length=50,
+        choices=[("FT","Full-time"),("PT","Part-time"),("IN","Internship"),("CT","Contract")],
+        default="FT"
+    )
+    is_urgent = models.BooleanField(default=False)
+    eligibility_notes = models.TextField(blank=True, null=True)
+    
+    package = models.CharField(max_length=100, blank=True, null=True)  # 💰 Salary / CTC
+    
+    contact_person = models.CharField(max_length=100, blank=True, null=True)
+    contact_email = models.EmailField(blank=True, null=True)
+    contact_phone = models.CharField(max_length=20, blank=True, null=True)
+    
+    apply_link = models.URLField(blank=True, null=True)
+    apply_instructions = models.TextField(blank=True, null=True)
+    
+    deadline = models.DateField(blank=True, null=True)
+    posted_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+
+    def __str__(self):
+        return f"{self.company} - {self.designation}"
+    
+    def save(self, *args, **kwargs):
+        new = self.pk is None
+        super().save(*args, **kwargs)
+        if new and self.is_active:
+            # collect recipients here
+            recipients = list(mainuser.objects.values_list("email", flat=True)) + \
+                         list(Subscriber.objects.values_list("email", flat=True))
+            link = reverse("jobs_list")
+            notify_all_users(
+                subject=f"New Job: {self.designation}",
+                message=self.description[:150],
+                link=f"https://http://127.0.0.1:8000/{link}",
+                recipients=recipients
+            )
+
+
+

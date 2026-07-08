@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,51 +95,61 @@
         .delay-300 { animation-delay: 300ms; }
     </style>
 </head>
+
+
 <body class="font-sans antialiased min-h-screen flex flex-col relative">
 
-    <!-- Background Shapes -->
-    <div class="bg-orb bg-agri-light w-[40rem] h-[40rem] top-[-5%] left-[-10%]"></div>
-    <div class="bg-orb bg-agri-accent w-[35rem] h-[35rem] top-[20%] right-[-10%] opacity-20"></div>
+   <header class="fixed w-full top-0 z-50 transition-all duration-300 bg-gradient-to-r from-green-100 via-green-50 to-white">
 
-    <!-- Header -->
-    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <a href="index.html" class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
-                    <div class="w-10 h-10 bg-agri-dark text-agri-accent rounded-xl flex items-center justify-center text-xl shadow-lg">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
-                </a>
+<div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+        <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
+    </div>
+    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+</div>
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="index.html" class="text-agri-dark font-medium hover:text-agri-light transition duration-300 relative group">
+                    <a href="/" class="text-agri-dark font-bold hover:text-agri-accent transition duration-300 relative group">
                         Home
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-light transition-all duration-300 group-hover:w-full"></span>
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-accent transition-all duration-300"></span>
                     </a>
-                    <a href="#" class="text-agri-dark font-medium hover:text-agri-light transition duration-300 relative group">
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Blogs
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-light transition-all duration-300 group-hover:w-full"></span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="#" class="text-agri-dark font-medium hover:text-agri-light transition duration-300 relative group">
+                     <a href="/jobs_list/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Jobs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Companies
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-light transition-all duration-300 group-hover:w-full"></span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="{% url 'business_news' %}" class="text-agri-light font-bold relative group">
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
                         Business News
-                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-light transition-all duration-300"></span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="join.html" class="bg-gradient-to-r from-agri-dark to-agri-light text-white px-6 py-2.5 rounded-full font-medium shadow-lg transform -translate-y-0.5 flex items-center gap-2 hover:shadow-xl transition-all duration-300">
+                    <a href="/services/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Our Services
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
                         <span>Join Community</span>
-                        <i class="fa-solid fa-users text-sm text-agri-accent"></i>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
                     </a>
                 </nav>
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-light focus:outline-none transition">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -149,17 +159,24 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
-                <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:bg-gray-50 transition">Home</a>
-                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:bg-gray-50 transition">Blogs</a>
-                <a href="#" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:bg-gray-50 transition">Companies</a>
-                <a href="{% url 'business_news' %}" class="block px-3 py-3 rounded-md text-base font-bold text-agri-light bg-green-50/50 transition">Business News</a>
-                <a href="join.html" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white shadow-md">Join Community</a>
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-bold text-agri-accent bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/jobs_list/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Jobs</a>
+                
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/services/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Our Services</a>
+                   
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow pt-24 pb-20 relative z-10 w-full">
-        
+
+  <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full 
+             bg-gradient-to-b from-green-100 via-white to-green-100">
+
         <!-- Top Back Link -->
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 mb-8 opacity-0 animate-fade-in-up">
             <a href="{% url 'business_news' %}" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-agri-dark transition-colors group">
@@ -310,7 +327,7 @@
                         <div class="mt-8 pt-6 border-t border-gray-100">
                             <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 text-center">Share this story</span>
                             <div class="flex justify-center gap-3">
-                                <button class="w-10 h-10 rounded-full bg-blue-50 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors flex items-center justify-center shadow-sm">
+                                {% comment %} <button class="w-10 h-10 rounded-full bg-blue-50 text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-colors flex items-center justify-center shadow-sm">
                                     <i class="fa-brands fa-linkedin-in"></i>
                                 </button>
                                 <button class="w-10 h-10 rounded-full bg-green-50 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors flex items-center justify-center shadow-sm">
@@ -318,7 +335,23 @@
                                 </button>
                                 <button class="w-10 h-10 rounded-full bg-gray-50 text-gray-600 hover:bg-black hover:text-white transition-colors flex items-center justify-center shadow-sm">
                                     <i class="fa-brands fa-x-twitter"></i>
-                                </button>
+                                </button> {% endcomment %}
+                                <button onclick="copyToClipboard('{{ request.build_absolute_uri }}')" 
+            class="flex items-center gap-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition">
+        <i class="fa-solid fa-link"></i> 
+    </button>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/?text={{ request.build_absolute_uri }}" target="_blank"
+       class="flex items-center gap-1 px-3 py-1.5 bg-green-100 text-green-700 rounded-md hover:bg-green-200 transition">
+        <i class="fa-brands fa-whatsapp"></i> 
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank"
+       class="flex items-center gap-1 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition">
+        <i class="fa-brands fa-linkedin"></i> 
+    </a>
                             </div>
                         </div>
 
@@ -328,74 +361,95 @@
             </div>
         </article>
     </main>
-
-    <!-- Footer Section -->
+  <!-- Footer Section -->
     <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
                 
-                <!-- Brand Info -->
-                <div class="lg:col-span-4">
+                <!-- Brand Info (Spans 4 columns) -->
+                <div class="lg:col-span-4 opacity-0 animate-fade-in-up">
                     <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 bg-agri-accent text-agri-dark rounded-lg flex items-center justify-center text-xl shadow-md">
-                            <i class="fa-solid fa-wheat-awn"></i>
-                        </div>
-                        <span class="ml-3 font-display font-bold text-2xl tracking-tight text-white">Agriculture Hub</span>
+                               
+
+<div class="w-10 h-10 bg-agri-accent rounded-lg flex items-center justify-center shadow-md overflow-hidden">
+    <img src="{% static 'Logo.jpeg' %}" alt="Company Logo" class="w-full h-full object-contain">
+</div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight">Agriculture Hub</span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
                         Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agri-light hover:text-white transition-all duration-300 transform hover:-translate-y-1">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-pink-500 hover:to-orange-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300 transform hover:-translate-y-1">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 transform hover:-translate-y-1">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-                    </div>
+             
+                    <!-- Social Icons -->
+<div class="flex space-x-4">
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+       class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#FF0000] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
                 </div>
 
                 <!-- Links Section 1 -->
-                <div class="lg:col-span-2 lg:col-start-6">
+                <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
                     <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Mentorship</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Webinars</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Opportunities</a></li>
+                          <li><a href="/jobs_list/" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
+                        <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
+                        <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="/business_news/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Updates</a></li>
                     </ul>
                 </div>
 
                 <!-- Links Section 2 -->
-                <div class="lg:col-span-2">
+                <div class="lg:col-span-2 opacity-0 animate-fade-in-up delay-200">
                     <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Startups</a></li>
-                        <li><a href="{% url 'business_news' %}" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Universities</a></li>
-                        <li><a href="join.html" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact</a></li>
+                        <li><a href="/aboutus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="/ourstory/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Story</a></li>
+                        <li><a href="/ourvision/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Vision & Mission</a></li>
+                        <li><a href="/contactus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact Us</a></li>
                     </ul>
                 </div>
 
                 <!-- Links Section 3 -->
-                <div class="lg:col-span-3">
+                <div class="lg:col-span-3 opacity-0 animate-fade-in-up delay-300">
                     <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Help Center</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> FAQ</a></li>
+                        <li><a href="/termsandconditions/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="/subscribe/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Subscribe</a></li>
+                               
                     </ul>
                 </div>
             </div>
 
-            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-0 animate-fade-in-up delay-400">
                 <p class="text-sm text-gray-400 text-center md:text-left">
                     &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
                 </p>
@@ -405,6 +459,15 @@
             </div>
         </div>
     </footer>
+
+    <script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert("Link copied to clipboard!");
+    });
+}
+</script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

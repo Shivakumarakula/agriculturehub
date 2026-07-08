@@ -1,0 +1,1480 @@
+{% comment %} <!-- jobs.html -->
+<section class="max-w-6xl mx-auto px-4 py-12">
+  <h2 class="text-3xl font-bold mb-8 text-center">🚀 Latest Job Openings</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {% for job in jobs %}
+    <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition">
+      
+      <!-- Urgent Badge -->
+      {% if job.is_urgent %}
+        <span class="inline-block bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">Urgent</span>
+      {% endif %}
+ <p class="text-gray-800 font-semibold">job type:{{ job.job_type }}</p>
+      <!-- Job Header -->
+       <p class="text-gray-800 font-semibold">company:{{ job.company }}</p>
+      <h3 class="text-xl font-bold text-agri-accent mb-1">job description:{{ job.designation }}</h3>
+      
+      <p class="text-gray-600">Job Locations:📍 {{ job.location }}</p>
+
+      <!-- Package -->
+      {% if job.package %}
+        <p class="text-gray-700 font-medium mt-1">💰 Package: {{ job.package }}</p>
+      {% endif %}
+
+      <!-- Details -->
+      {% if job.qualifications %}
+        <p class="text-gray-600">🎓 Qualifications: {{ job.qualifications }}</p>
+      {% endif %}
+      {% if job.experience %}
+        <p class="text-gray-600">💼 Experience: {{ job.experience }}</p>
+      {% endif %}
+      {% if job.eligibility_notes %}
+        <p class="text-gray-600">Notes:⚡ {{ job.eligibility_notes }}</p>
+      {% endif %}
+      {% if job.description %}
+        <p class="text-gray-600 mt-2">job description: {{ job.description }}</p>
+      {% endif %}
+
+      <!-- Contact -->
+      <div class="mt-4 text-sm text-gray-700 space-y-1">
+        {% if job.contact_person %}
+          👤 Contact: {{ job.contact_person }}<br>
+        {% endif %}
+        {% if job.contact_email %}
+          📩 Email: <a href="mailto:{{ job.contact_email }}" class="text-blue-600">{{ job.contact_email }}</a><br>
+        {% endif %}
+        {% if job.contact_phone %}
+          📞 Phone/WhatsApp: {{ job.contact_phone }}
+        {% endif %}
+      </div>
+        {% if job.apply_instructions %}
+        <p class="text-gray-600 mt-2">Apply Instructions: {{ job.apply_instructions }}</p>
+      {% endif %}
+      <!-- Apply Button -->
+      <div class="mt-6">
+        {% if job.apply_link %}
+          <a href="{{ job.apply_link }}" target="_blank"
+             class="w-full block text-center py-3 px-6 rounded-lg border-2 border-agri-accent text-agri-accent font-semibold 
+                    hover:bg-agri-accent hover:text-white transition">
+            Apply Now
+          </a>
+        {% elif job.contact_email %}
+          <a href="mailto:{{ job.contact_email }}"
+             class="w-full block text-center py-3 px-6 rounded-lg border-2 border-agri-accent text-agri-accent font-semibold 
+                    hover:bg-agri-accent hover:text-white transition">
+            Apply via Email
+          </a>
+        {% elif job.contact_phone %}
+          <a href="https://wa.me/{{ job.contact_phone }}" target="_blank"
+             class="w-full block text-center py-3 px-6 rounded-lg border-2 border-agri-accent text-agri-accent font-semibold 
+                    hover:bg-agri-accent hover:text-white transition">
+            Apply via WhatsApp
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Footer -->
+      <p class="text-xs text-gray-400 mt-3">Posted on {{ job.posted_at|date:"M d, Y" }}{% if job.deadline %} | Deadline: {{ job.deadline|date:"M d, Y" }}{% endif %}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+ {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs & Internships | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            blue: '#0284c7',     // Professional Blue
+                            teal: '#0f766e',     // Deep Teal
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'modal-enter': 'modalEnter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Elements */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Glassmorphism for navbar and modals */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.05);
+        }
+
+        .glass-modal-overlay {
+            background: rgba(15, 39, 29, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Job Card Hover Interactions */
+        .job-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(243, 244, 246, 1);
+        }
+        .job-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(27, 67, 50, 0.12);
+            border-color: rgba(45, 106, 79, 0.2);
+        }
+
+        /* Modal custom scrollbar */
+        .modal-content-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .modal-content-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Custom Dropdown Styling */
+        select.custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape bg-agri-light w-[40rem] h-[40rem] top-[-5%] left-[-10%] animate-float"></div>
+    <div class="bg-shape bg-agri-blue w-[35rem] h-[35rem] top-[30%] right-[-10%] animate-float-delayed opacity-15"></div>
+
+    <!-- Header -->
+    <header class="glass-nav fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden bg-agri-dark text-agri-accent">
+                        <i class="fa-solid fa-seedling text-xl"></i>
+                    </div>
+                    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/join/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/join/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-24 relative z-10 w-full overflow-hidden">
+        
+        <!-- Page Header -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center opacity-0 animate-fade-in-up">
+            <span class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-agri-blue/10 text-agri-blue text-sm font-bold tracking-widest uppercase mb-4 border border-agri-blue/20">
+                <i class="fa-solid fa-briefcase"></i> Career Portal
+            </span>
+            <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-agri-dark to-agri-blue">Job Openings</span>
+            </h1>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg">
+                Find your next big opportunity. Browse full-time roles, internships, and contract positions from top agriculture and agritech organizations.
+            </p>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 opacity-0 animate-fade-in-up" style="animation-delay: 100ms;">
+            <div class="bg-white p-3 sm:p-4 rounded-2xl sm:rounded-[2rem] shadow-lg border border-gray-100">
+                <form method="get" class="flex flex-col md:flex-row gap-3">
+                    
+                    <!-- Search Input -->
+                    <div class="relative flex-grow">
+                        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                        </div>
+                        <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Job title, company, or keyword..." 
+                            class="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-agri-blue focus:ring-2 focus:ring-agri-blue/20 transition-all outline-none text-gray-700">
+                    </div>
+
+                    <!-- Job Type Filter -->
+                    <div class="md:w-64 flex-shrink-0 relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-layer-group text-gray-400"></i>
+                        </div>
+                        <select name="job_type" class="custom-select w-full pl-11 pr-5 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-agri-blue focus:ring-2 focus:ring-agri-blue/20 transition-all outline-none text-gray-700 font-medium cursor-pointer">
+                            <option value="">All Job Types</option>
+                            <option value="FT" {% if request.GET.job_type == "FT" %}selected{% endif %}>Full-time</option>
+                            <option value="PT" {% if request.GET.job_type == "PT" %}selected{% endif %}>Part-time</option>
+                            <option value="IN" {% if request.GET.job_type == "IN" %}selected{% endif %}>Internship</option>
+                            <option value="CT" {% if request.GET.job_type == "CT" %}selected{% endif %}>Contract</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="w-full md:w-auto px-8 py-3.5 bg-agri-dark text-white font-bold rounded-xl hover:bg-agri-light transition-all shadow-md transform hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap">
+                        Find Jobs <i class="fa-solid fa-arrow-right text-sm text-agri-accent"></i>
+                    </button>
+                    
+                </form>
+            </div>
+        </div>
+
+        <!-- Jobs Grid -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                
+                {% for job in jobs %}
+                <!-- Single Job Card -->
+                <div class="job-card bg-white rounded-3xl p-6 md:p-8 flex flex-col h-full relative overflow-hidden reveal">
+                    
+                    <!-- Decorative corner accent if urgent -->
+                    {% if job.is_urgent %}
+                        <div class="absolute top-0 right-0 border-t-[60px] border-r-[60px] border-t-red-500 border-r-transparent"></div>
+                        <i class="fa-solid fa-bolt absolute top-3 right-3 text-white text-sm"></i>
+                    {% endif %}
+
+                    <!-- Card Header: Company & Badges -->
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-agri-dark text-xl font-bold shadow-sm">
+                                {{ job.company|make_list|first|upper }}
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-500 uppercase tracking-wider">{{ job.company }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col items-end gap-2">
+                            {% if job.is_urgent %}
+                                <span class="inline-block bg-red-100 text-red-600 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                                    Urgent Hiring
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Job Title -->
+                    <h3 class="font-display text-xl sm:text-2xl font-bold text-gray-900 mb-4 line-clamp-2">
+                        {{ job.designation }}
+                    </h3>
+
+                    <!-- Quick Info Badges -->
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <!-- Job Type -->
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-agri-blue text-xs font-bold rounded-lg border border-blue-100">
+                            <i class="fa-solid fa-briefcase"></i> 
+                            {{ job.get_job_type_display|default:job.job_type }}
+                        </span>
+                        <!-- Location -->
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">
+                            <i class="fa-solid fa-location-dot text-gray-400"></i> 
+                            {{ job.location|truncatechars:20 }}
+                        </span>
+                        <!-- Package -->
+                        {% if job.package %}
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 text-xs font-bold rounded-lg border border-green-100">
+                            <i class="fa-solid fa-money-bill-wave"></i> 
+                            {{ job.package }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Short Description / Experience -->
+                    <div class="mb-6 flex-grow">
+                        {% if job.experience %}
+                            <p class="text-sm text-gray-600 mb-2">
+                                <strong class="text-gray-800">Experience Required:</strong> {{ job.experience }}
+                            </p>
+                        {% endif %}
+                        <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">
+                            {{ job.description|default:"No detailed description provided. Click to view more information." }}
+                        </p>
+                    </div>
+
+                    <!-- Footer Row -->
+                    <div class="pt-5 border-t border-gray-100 flex items-center justify-between mt-auto">
+                        <div class="text-xs text-gray-400 font-medium">
+                            Posted {{ job.posted_at|date:"M d, Y" }}
+                        </div>
+                        
+                        <!-- Open Modal Button -->
+                        <button onclick="openModal('modal-job-{{ job.id|default:forloop.counter }}')" class="inline-flex items-center gap-2 px-5 py-2.5 bg-agri-bg text-agri-dark font-bold rounded-xl hover:bg-agri-dark hover:text-white transition-colors duration-300 shadow-sm group">
+                            View Details <i class="fa-solid fa-arrow-right-long group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- FULL DETAILS MODAL (Hidden by default) -->
+                <div id="modal-job-{{ job.id|default:forloop.counter }}" class="fixed inset-0 z-[100] hidden items-center justify-center px-4 pt-4 pb-20 text-center sm:p-0">
+                    <!-- Background Overlay -->
+                    <div class="fixed inset-0 glass-modal-overlay transition-opacity" aria-hidden="true" onclick="closeModal('modal-job-{{ job.id|default:forloop.counter }}')"></div>
+
+                    <!-- Modal Panel -->
+                    <div class="relative inline-block w-full max-w-3xl transform overflow-hidden rounded-3xl bg-white text-left align-bottom shadow-2xl transition-all sm:my-8 sm:align-middle animate-modal-enter border border-gray-100 flex flex-col max-h-[90vh]">
+                        
+                        <!-- Modal Header (Sticky) -->
+                        <div class="bg-gray-50 px-6 py-5 border-b border-gray-200 flex justify-between items-center sticky top-0 z-10">
+                            <div>
+                                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">{{ job.company }}</p>
+                                <h3 class="font-display text-xl sm:text-2xl font-bold text-gray-900">{{ job.designation }}</h3>
+                            </div>
+                            <button type="button" onclick="closeModal('modal-job-{{ job.id|default:forloop.counter }}')" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors shadow-sm focus:outline-none">
+                                <i class="fa-solid fa-xmark text-lg"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body (Scrollable) -->
+                        <div class="px-6 py-6 sm:p-8 overflow-y-auto modal-content-scroll flex-grow">
+                            
+                            <!-- Badges Row inside modal -->
+                            <div class="flex flex-wrap gap-2 mb-8 pb-6 border-b border-gray-100">
+                                <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-semibold rounded-md"><i class="fa-solid fa-location-dot mr-1 text-gray-400"></i> {{ job.location }}</span>
+                                <span class="px-3 py-1 bg-blue-50 text-agri-blue text-sm font-semibold rounded-md"><i class="fa-solid fa-briefcase mr-1"></i> {{ job.get_job_type_display|default:job.job_type }}</span>
+                                {% if job.package %}
+                                    <span class="px-3 py-1 bg-green-50 text-green-700 text-sm font-semibold rounded-md"><i class="fa-solid fa-money-bill-wave mr-1"></i> {{ job.package }}</span>
+                                {% endif %}
+                                {% if job.experience %}
+                                    <span class="px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-md"><i class="fa-solid fa-clock-rotate-left mr-1"></i> {{ job.experience }}</span>
+                                {% endif %}
+                                {% if job.is_urgent %}
+                                    <span class="px-3 py-1 bg-red-100 text-red-700 text-sm font-bold rounded-md uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> Urgent</span>
+                                {% endif %}
+                            </div>
+
+                            <!-- Job Description -->
+                            <div class="mb-8">
+                                <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-align-left text-agri-accent"></i> Job Description</h4>
+                                <div class="text-gray-600 leading-relaxed text-sm sm:text-base whitespace-pre-line bg-gray-50/50 p-5 rounded-2xl border border-gray-100">
+                                    {{ job.description|default:"No description provided." }}
+                                </div>
+                            </div>
+
+                            <!-- Qualifications & Notes -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                {% if job.qualifications %}
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-agri-blue"></i> Qualifications</h4>
+                                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">{{ job.qualifications }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if job.eligibility_notes %}
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-circle-exclamation text-yellow-500"></i> Eligibility Notes</h4>
+                                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">{{ job.eligibility_notes }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Contact & Instructions Box -->
+                            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-2">
+                                <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fa-solid fa-address-book text-blue-500"></i> Contact & Application Info</h4>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-sm text-gray-700">
+                                    {% if job.contact_person %}
+                                        <div class="flex items-center gap-2"><i class="fa-solid fa-user text-gray-400"></i> <strong>Contact:</strong> {{ job.contact_person }}</div>
+                                    {% endif %}
+                                    {% if job.contact_email %}
+                                        <div class="flex items-center gap-2"><i class="fa-solid fa-envelope text-gray-400"></i> <strong>Email:</strong> <a href="mailto:{{ job.contact_email }}" class="text-agri-blue hover:underline">{{ job.contact_email }}</a></div>
+                                    {% endif %}
+                                    {% if job.contact_phone %}
+                                        <div class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-green-500"></i> <strong>Phone:</strong> {{ job.contact_phone }}</div>
+                                    {% endif %}
+                                </div>
+
+                                {% if job.apply_instructions %}
+                                    <div class="mt-4 pt-4 border-t border-blue-200">
+                                        <p class="font-bold text-gray-900 text-sm mb-1">How to apply:</p>
+                                        <p class="text-gray-700 text-sm">{{ job.apply_instructions }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                        <!-- Modal Footer (Sticky actions) -->
+                        <div class="bg-gray-50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse border-t border-gray-200 sticky bottom-0 z-10">
+                            
+                            <!-- Dynamic Apply Buttons -->
+                            {% if job.apply_link %}
+                                <a href="{{ job.apply_link }}" target="_blank" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-agri-dark px-6 py-3 text-base font-bold text-white shadow-md hover:bg-agri-light focus:outline-none sm:ml-3 sm:w-auto transition-colors">
+                                    Apply Now <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            {% elif job.contact_email %}
+                                <a href="mailto:{{ job.contact_email }}" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-agri-blue px-6 py-3 text-base font-bold text-white shadow-md hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto transition-colors">
+                                    Apply via Email <i class="fa-solid fa-envelope text-sm"></i>
+                                </a>
+                            {% elif job.contact_phone %}
+                                <a href="https://wa.me/{{ job.contact_phone }}" target="_blank" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-[#25D366] px-6 py-3 text-base font-bold text-white shadow-md hover:bg-green-600 focus:outline-none sm:ml-3 sm:w-auto transition-colors">
+                                    Apply via WhatsApp <i class="fa-brands fa-whatsapp text-lg"></i>
+                                </a>
+                            {% endif %}
+                            
+                            <!-- Close Button (Mobile friendly) -->
+                            <button type="button" onclick="closeModal('modal-job-{{ job.id|default:forloop.counter }}')" class="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-base font-bold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto transition-colors">
+                                Close
+                            </button>
+                            
+                            <div class="mr-auto hidden sm:flex items-center text-xs text-gray-400 font-medium">
+                                {% if job.deadline %}
+                                    <i class="fa-regular fa-clock mr-1.5"></i> Deadline: {{ job.deadline|date:"M d, Y" }}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- End Modal -->
+                
+                {% empty %}
+                <!-- Empty State -->
+                <div class="col-span-1 md:col-span-2 py-20 px-4 text-center bg-white rounded-[2.5rem] border border-gray-100 shadow-sm reveal">
+                    <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-briefcase text-4xl text-gray-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">No jobs found</h3>
+                    <p class="text-gray-500 max-w-md mx-auto mb-8">We couldn't find any positions matching your search criteria. Please adjust your filters or check back later.</p>
+                    <a href="?" class="inline-flex items-center gap-2 px-6 py-3 bg-agri-bg text-agri-dark font-semibold rounded-xl hover:bg-gray-200 transition-colors">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Filters
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-4 reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-agri-accent text-agri-dark rounded-lg flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight text-white">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+                    <!-- Social Icons -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-agri-blue hover:text-white transition-all duration-300 transform hover:-translate-y-1 text-gray-300">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-pink-500 hover:to-orange-400 hover:text-white transition-all duration-300 transform hover:-translate-y-1 text-gray-300">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all duration-300 transform hover:-translate-y-1 text-gray-300">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 transform hover:-translate-y-1 text-gray-300">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6 reveal delay-100">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Mentorship</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Webinars</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Opportunities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2 reveal delay-200">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/aboutus/" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Startups</a></li>
+                        <li><a href="/companies/" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Universities</a></li>
+                        <li><a href="/contactus/" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3 reveal delay-300">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/termsandconditions/" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 reveal delay-400">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Modal Logic
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto'; // Restore background scrolling
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // --- Navbar Scroll Effect ---
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+
+            // --- Scroll Reveal Animations ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.1, 
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, (index % 2) * 100); // Stagger by 100ms for up to 2 columns
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+            
+            // Close modal when pressing Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    const modals = document.querySelectorAll('[id^="modal-job-"]');
+                    modals.forEach(modal => {
+                        if (!modal.classList.contains('hidden')) {
+                            closeModal(modal.id);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> {% endcomment %}
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs & Internships | Agriculture Hub</title>
+    
+    <!-- Google Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        agri: {
+                            dark: '#1B4332',     // Deep Canopy Green
+                            light: '#2D6A4F',    // Secondary Green
+                            accent: '#E9C46A',   // Harvest Gold
+                            bg: '#FBFBF9',       // Earthy Off-White
+                            text: '#2d3748',     // Soft Black/Gray
+                            blue: '#0284c7',     // Professional Blue
+                            teal: '#0f766e',     // Deep Teal
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 10s ease-in-out infinite 3s',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'modal-enter': 'modalEnter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Abstract Background Elements */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Glassmorphism for navbar and modals */
+        .glass-nav {
+            background: rgba(251, 251, 249, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.05);
+        }
+
+        .glass-modal-overlay {
+            background: rgba(15, 39, 29, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Job Card Hover Interactions */
+        .job-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(243, 244, 246, 1);
+        }
+        .job-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(27, 67, 50, 0.12);
+            border-color: rgba(45, 106, 79, 0.2);
+        }
+
+        /* Modal custom scrollbar */
+        .modal-content-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .modal-content-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* Custom Dropdown Styling */
+        select.custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+    </style>
+</head>
+
+
+<body class="font-sans antialiased min-h-screen flex flex-col relative">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 bg-gradient-to-r from-green-100 via-green-50 to-white">
+ 
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+<div class="flex-shrink-0 flex items-center cursor-pointer transform transition hover:scale-105">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+        <img src="{% static 'Logo.jpeg' %}" alt="Agriculture Hub Logo" class="w-full h-full object-contain">
+    </div>
+    <span class="ml-3 font-display font-bold text-2xl text-agri-dark tracking-tight">Agriculture Hub</span>
+</div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-agri-dark font-bold hover:text-agri-accent transition duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-agri-accent transition-all duration-300"></span>
+                    </a>
+                    <a href="/blogs/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Blogs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/jobs_list/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Jobs
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/companies/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Companies
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/business_news/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Business News
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/services/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Our Services
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                     <a href="/login/" class="text-agri-dark font-medium hover:text-agri-accent transition duration-300 relative group">
+                        Login
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-agri-accent transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="/contactus/" class="bg-agri-dark text-white px-6 py-2.5 rounded-full font-medium hover:bg-agri-light hover:shadow-lg transform hover:-translate-y-0.5 transition duration-300 flex items-center gap-2">
+                        <span>Join Community</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-agri-dark hover:text-agri-accent focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                <a href="/" class="block px-3 py-3 rounded-md text-base font-bold text-agri-accent bg-gray-50 transition">Home</a>
+                <a href="/blogs/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Blogs</a>
+                <a href="/jobs_list/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Jobs</a>
+                
+                <a href="/companies/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Companies</a>
+                <a href="/business_news/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Business News</a>
+                <a href="/services/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Our Services</a>
+                   
+                <a href="/login/" class="block px-3 py-3 rounded-md text-base font-medium text-agri-dark hover:text-agri-accent hover:bg-gray-50 transition">Login</a>
+                <a href="/contactus/" class="block px-3 py-3 mt-4 text-center rounded-xl text-base font-medium bg-agri-dark text-white hover:bg-agri-light transition shadow-md">Join Community</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="flex-grow flex flex-col items-center justify-center pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 w-full bg-gradient-to-b from-green-100 via-white to-green-100">
+
+        
+        <!-- Page Header -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center opacity-0 animate-fade-in-up">
+            <span class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-agri-blue/10 text-agri-blue text-sm font-bold tracking-widest uppercase mb-4 border border-agri-blue/20">
+                <i class="fa-solid fa-briefcase"></i> Career Portal
+            </span>
+            <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-agri-dark to-agri-blue">Job Openings</span>
+            </h1>
+            <p class="text-gray-500 max-w-2xl mx-auto text-lg">
+                Find your next big opportunity. Browse full-time roles, internships, and contract positions from top agriculture and agritech organizations.
+            </p>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 opacity-0 animate-fade-in-up" style="animation-delay: 100ms;">
+            <div class="bg-white p-3 sm:p-4 rounded-2xl sm:rounded-[2rem] shadow-lg border border-gray-100">
+                <form method="get" class="flex flex-col md:flex-row gap-3">
+                    
+                    <!-- Search Input -->
+                    <div class="relative flex-grow">
+                        <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                        </div>
+                        <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Job title, company, or keyword..." 
+                            class="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-agri-blue focus:ring-2 focus:ring-agri-blue/20 transition-all outline-none text-gray-700">
+                    </div>
+
+                    <!-- Job Type Filter -->
+                    <div class="md:w-64 flex-shrink-0 relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-layer-group text-gray-400"></i>
+                        </div>
+                        <select name="job_type" class="custom-select w-full pl-11 pr-5 py-3.5 bg-gray-50 border border-transparent rounded-xl focus:bg-white focus:border-agri-blue focus:ring-2 focus:ring-agri-blue/20 transition-all outline-none text-gray-700 font-medium cursor-pointer">
+                            <option value="">All Job Types</option>
+                            <option value="FT" {% if request.GET.job_type == "FT" %}selected{% endif %}>Full-time</option>
+                            <option value="PT" {% if request.GET.job_type == "PT" %}selected{% endif %}>Part-time</option>
+                            <option value="IN" {% if request.GET.job_type == "IN" %}selected{% endif %}>Internship</option>
+                            <option value="CT" {% if request.GET.job_type == "CT" %}selected{% endif %}>Contract</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="w-full md:w-auto px-8 py-3.5 bg-agri-dark text-white font-bold rounded-xl hover:bg-agri-light transition-all shadow-md transform hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap">
+                        Find Jobs <i class="fa-solid fa-arrow-right text-sm text-agri-accent"></i>
+                    </button>
+                      <!-- Clear Filters Button -->
+    <a href="{% url 'jobs_list' %}" 
+       class="w-full md:w-auto px-8 py-3.5 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-all shadow-md transform hover:-translate-y-0.5 flex items-center justify-center gap-2 whitespace-nowrap">
+        Clear Filters <i class="fa-solid fa-xmark text-sm text-red-500"></i>
+    </a>
+                </form>
+            </div>
+        </div>
+
+        <!-- Jobs Grid -->
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                
+                {% for job in jobs %}
+                <!-- Single Job Card -->
+                <div class="job-card bg-white rounded-3xl p-6 md:p-8 flex flex-col h-full relative overflow-hidden reveal">
+                    
+                    <!-- Decorative corner accent if urgent -->
+                    {% if job.is_urgent %}
+                        <div class="absolute top-0 right-0 border-t-[60px] border-r-[60px] border-t-red-500 border-r-transparent"></div>
+                        <i class="fa-solid fa-bolt absolute top-3 right-3 text-white text-sm"></i>
+                    {% endif %}
+<div class="flex items-center gap-2 mt-2">
+  {% if job.deadline %}
+    {% if job.deadline < today %}
+      <span class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+        Closed
+      </span>
+    {% else %}
+      <span class="inline-block bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+        Running ({{ job.deadline|timeuntil:today }} left)
+      </span>
+    {% endif %}
+  {% endif %}
+</div>
+
+                    <!-- Card Header: Company & Badges -->
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-agri-dark text-xl font-bold shadow-sm">
+                                {{ job.company|make_list|first|upper }}
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-gray-500 uppercase tracking-wider">{{ job.company }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col items-end gap-2">
+                            {% if job.is_urgent %}
+                                <span class="inline-block bg-red-100 text-red-600 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                                    Urgent Hiring
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Job Title -->
+                    <h3 class="font-display text-xl sm:text-2xl font-bold text-gray-900 mb-4 line-clamp-2">
+                        {{ job.designation }}
+                    </h3>
+
+                    <!-- Quick Info Badges -->
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <!-- Job Type -->
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-agri-blue text-xs font-bold rounded-lg border border-blue-100">
+                            <i class="fa-solid fa-briefcase"></i> 
+                            {{ job.get_job_type_display|default:job.job_type }}
+                        </span>
+                        <!-- Location -->
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 text-gray-600 text-xs font-medium rounded-lg border border-gray-200">
+                            <i class="fa-solid fa-location-dot text-gray-400"></i> 
+                            {{ job.location|truncatechars:20 }}
+                        </span>
+                        <!-- Package -->
+                        {% if job.package %}
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 text-xs font-bold rounded-lg border border-green-100">
+                            <i class="fa-solid fa-money-bill-wave"></i> 
+                            {{ job.package }}
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Short Description / Experience -->
+                    <div class="mb-6 flex-grow">
+                        {% if job.experience %}
+                            <p class="text-sm text-gray-600 mb-2">
+                                <strong class="text-gray-800">Experience Required:</strong> {{ job.experience }}
+                            </p>
+                        {% endif %}
+                        <p class="text-gray-500 text-sm line-clamp-2 leading-relaxed">
+                            {{ job.description|default:"No detailed description provided. Click to view more information." }}
+                        </p>
+                    </div>
+
+                    <!-- Footer Row -->
+                    <div class="pt-5 border-t border-gray-100 flex items-center justify-between mt-auto">
+                        <div class="text-xs text-gray-400 font-medium">
+                            Posted {{ job.posted_at|date:"M d, Y" }}
+                        </div>
+                        
+                        <!-- Open Modal Button -->
+                        <button onclick="openModal('modal-job-{{ job.id|default:forloop.counter }}')" class="inline-flex items-center gap-2 px-5 py-2.5 bg-agri-bg text-agri-dark font-bold rounded-xl hover:bg-agri-dark hover:text-white transition-colors duration-300 shadow-sm group">
+                            View Details <i class="fa-solid fa-arrow-right-long group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+
+                </div>
+                
+                {% empty %}
+                <!-- Empty State -->
+                <div class="col-span-1 md:col-span-2 py-20 px-4 text-center bg-white rounded-[2.5rem] border border-gray-100 shadow-sm reveal">
+                    <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-briefcase text-4xl text-gray-400"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">No jobs found</h3>
+                    <p class="text-gray-500 max-w-md mx-auto mb-8">We couldn't find any positions matching your search criteria. Please adjust your filters or check back later.</p>
+                    <a href="?" class="inline-flex items-center gap-2 px-6 py-3 bg-agri-bg text-agri-dark font-semibold rounded-xl hover:bg-gray-200 transition-colors">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Filters
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </main>
+
+    <!-- MODALS SECTION (Moved outside main to fix z-index and header overlap) -->
+    {% for job in jobs %}
+    <div id="modal-job-{{ job.id|default:forloop.counter }}" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4 sm:p-6">
+        <!-- Background Overlay -->
+        <div class="fixed inset-0 glass-modal-overlay transition-opacity" aria-hidden="true" onclick="closeModal('modal-job-{{ job.id|default:forloop.counter }}')"></div>
+
+        <!-- Modal Panel -->
+        <div class="relative w-full max-w-4xl transform overflow-hidden rounded-[2rem] bg-white text-left shadow-2xl transition-all flex flex-col max-h-[90vh] md:max-h-[85vh] animate-modal-enter">
+            
+            <!-- Modal Header (Sticky) -->
+            <div class="bg-gray-50 px-6 py-5 border-b border-gray-200 flex justify-between items-center sticky top-0 z-20">
+                <div>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">{{ job.company }}</p>
+                    <h3 class="font-display text-xl sm:text-2xl font-bold text-gray-900">{{ job.designation }}</h3>
+                </div>
+                <button type="button" onclick="closeModal('modal-job-{{ job.id|default:forloop.counter }}')" class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors shadow-sm focus:outline-none flex-shrink-0">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="px-6 py-6 sm:p-8 overflow-y-auto modal-content-scroll flex-grow">
+                
+                <!-- Badges Row inside modal -->
+                <div class="flex flex-wrap gap-2 mb-8 pb-6 border-b border-gray-100">
+                    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-semibold rounded-md"><i class="fa-solid fa-location-dot mr-1 text-gray-400"></i> {{ job.location }}</span>
+                    <span class="px-3 py-1 bg-blue-50 text-agri-blue text-sm font-semibold rounded-md"><i class="fa-solid fa-briefcase mr-1"></i> {{ job.get_job_type_display|default:job.job_type }}</span>
+                    {% if job.package %}
+                        <span class="px-3 py-1 bg-green-50 text-green-700 text-sm font-semibold rounded-md"><i class="fa-solid fa-money-bill-wave mr-1"></i> {{ job.package }}</span>
+                    {% endif %}
+                    {% if job.experience %}
+                        <span class="px-3 py-1 bg-purple-50 text-purple-700 text-sm font-semibold rounded-md"><i class="fa-solid fa-clock-rotate-left mr-1"></i> {{ job.experience }}</span>
+                    {% endif %}
+                    {% if job.is_urgent %}
+                        <span class="px-3 py-1 bg-red-100 text-red-700 text-sm font-bold rounded-md uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> Urgent</span>
+                    {% endif %}
+                </div>
+
+                <!-- Job Description -->
+                <div class="mb-8">
+                    <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fa-solid fa-align-left text-agri-accent"></i> Job Description</h4>
+                    <div class="text-gray-700 leading-relaxed text-sm sm:text-base bg-gray-50/50 p-6 rounded-2xl border border-gray-100 auto-format-text shadow-sm">
+                        {{ job.description|default:"No description provided." }}
+                    </div>
+                </div>
+
+                <!-- Qualifications & Notes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    {% if job.qualifications %}
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-agri-blue"></i> Qualifications</h4>
+                        <div class="text-gray-700 text-sm sm:text-base leading-relaxed bg-blue-50/30 p-6 rounded-2xl border border-blue-100/50 auto-format-text shadow-sm h-full">
+                            {{ job.qualifications }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if job.eligibility_notes %}
+                    <div>
+                        <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fa-solid fa-circle-exclamation text-yellow-500"></i> Eligibility Notes</h4>
+                        <div class="text-gray-700 text-sm sm:text-base leading-relaxed bg-yellow-50/30 p-6 rounded-2xl border border-yellow-100/50 auto-format-text shadow-sm h-full">
+                            {{ job.eligibility_notes }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Contact & Instructions Box -->
+                <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fa-solid fa-address-book text-blue-500"></i> Contact & Application Info</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 text-sm text-gray-700">
+                        {% if job.contact_person %}
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-user text-gray-400"></i> <strong>Contact:</strong> {{ job.contact_person }}</div>
+                        {% endif %}
+                        {% if job.contact_email %}
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-envelope text-gray-400"></i> <strong>Email:</strong> <a href="mailto:{{ job.contact_email }}" class="text-agri-blue hover:underline">{{ job.contact_email }}</a></div>
+                        {% endif %}
+                        {% if job.contact_phone %}
+                            <div class="flex items-center gap-2"><i class="fa-brands fa-whatsapp text-green-500"></i> <strong>Phone:</strong> {{ job.contact_phone }}</div>
+                        {% endif %}
+                    </div>
+
+                    {% if job.apply_instructions %}
+                        <div class="mt-4 pt-4 border-t border-blue-200">
+                            <p class="font-bold text-gray-900 text-sm mb-2">How to apply:</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">{{ job.apply_instructions }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <!-- Modal Footer (Sticky actions) -->
+            <div class="bg-gray-50 px-6 py-4 sm:px-8 sm:flex sm:flex-row-reverse border-t border-gray-200 sticky bottom-0 z-20">
+                
+                <!-- Dynamic Apply Buttons -->
+                {% if job.apply_link %}
+                    <a href="{{ job.apply_link }}" target="_blank" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-agri-dark px-6 py-3 text-base font-bold text-white shadow-md hover:bg-agri-light focus:outline-none sm:ml-3 sm:w-auto transition-colors">
+                        Apply Now <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                {% elif job.contact_email %}
+                    <a href="mailto:{{ job.contact_email }}" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-agri-blue px-6 py-3 text-base font-bold text-white shadow-md hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto transition-colors">
+                        Apply via Email <i class="fa-solid fa-envelope text-sm"></i>
+                    </a>
+                {% elif job.contact_phone %}
+                    <a href="https://wa.me/{{ job.contact_phone }}" target="_blank" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-[#25D366] px-6 py-3 text-base font-bold text-white shadow-md hover:bg-green-600 focus:outline-none sm:ml-3 sm:w-auto transition-colors">
+                        Apply via WhatsApp <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                {% endif %}
+                
+                <!-- Close Button (Mobile friendly) -->
+                <button type="button" onclick="closeModal('modal-job-{{ job.id|default:forloop.counter }}')" class="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-base font-bold text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto transition-colors">
+                    Close
+                </button>
+                
+                <div class="mr-auto hidden sm:flex items-center text-xs text-gray-400 font-medium">
+                    {% if job.deadline %}
+                        <i class="fa-regular fa-clock mr-1.5"></i> Deadline: {{ job.deadline|date:"M d, Y" }}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+      <!-- Footer Section -->
+    <footer class="bg-agri-dark text-white border-t-4 border-agri-accent relative z-10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
+                
+                <!-- Brand Info (Spans 4 columns) -->
+                <div class="lg:col-span-4 opacity-0 animate-fade-in-up">
+                    <div class="flex items-center mb-6">
+                               
+
+<div class="w-10 h-10 bg-agri-accent rounded-lg flex items-center justify-center shadow-md overflow-hidden">
+    <img src="{% static 'Logo.jpeg' %}" alt="Company Logo" class="w-full h-full object-contain">
+</div>
+                        <span class="ml-3 font-display font-bold text-2xl tracking-tight">Agriculture Hub</span>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        Bridging the gap between agriculture students, professionals, startups, universities, and the industry. We are India's most trusted agriculture career platform.
+                    </p>
+             
+                    <!-- Social Icons -->
+<div class="flex space-x-4">
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/company/agriculturehub?originalSubdomain=in" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-linkedin-in"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/agrijobs_updates?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"
+       class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://whatsapp.com/channel/0029Vb4ANvK4IBhF9HPKdA3V" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@agriknowledge1?si=p5GBR3Oxps8LUSML" target="_blank"
+       class="w-10 h-10 rounded-full bg-[#FF0000] flex items-center justify-center text-white 
+              hover:bg-agri-accent hover:text-agri-dark transition-all duration-300 transform hover:-translate-y-1">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
+                </div>
+
+                <!-- Links Section 1 -->
+                <div class="lg:col-span-2 lg:col-start-6 opacity-0 animate-fade-in-up delay-100">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Platform</h4>
+                    <ul class="space-y-3">
+                          <li><a href="/jobs_list/" class="text-white font-medium transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Jobs & Internships</a></li>
+                        <li><a href="/blogs/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Blogs</a></li>
+                        <li><a href="/services/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Services</a></li>
+                        <li><a href="/companies/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Companies</a></li>
+                        <li><a href="/business_news/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Global Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 2 -->
+                <div class="lg:col-span-2 opacity-0 animate-fade-in-up delay-200">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Community</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/aboutus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> About Us</a></li>
+                        <li><a href="/ourstory/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Story</a></li>
+                        <li><a href="/ourvision/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Our Vision & Mission</a></li>
+                        <li><a href="/contactus/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Section 3 -->
+                <div class="lg:col-span-3 opacity-0 animate-fade-in-up delay-300">
+                    <h4 class="font-display font-semibold text-lg mb-5 text-agri-accent">Legal & Help</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/termsandconditions/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Terms of Service</a></li>
+                        <li><a href="/privacypolicy/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Privacy Policy</a></li>
+                        <li><a href="/subscribe/" class="text-gray-300 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fa-solid fa-angle-right text-xs text-agri-accent"></i> Subscribe</a></li>
+                               
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Tagline -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 opacity-0 animate-fade-in-up delay-400">
+                <p class="text-sm text-gray-400 text-center md:text-left">
+                    &copy; 2026 Agriculture Hub. Empowering the future of agriculture.
+                </p>
+                <p class="text-sm text-agri-accent font-medium text-center md:text-right italic">
+                    Connecting Opportunities • Empowering Agriculture • Building the Future
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Interactive JavaScript -->
+    <script>
+        // Modal Logic
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = 'auto'; // Restore background scrolling
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Auto-format Job Details by Sentence ---
+            document.querySelectorAll('.auto-format-text').forEach(el => {
+                let text = el.textContent.trim();
+                // Check to avoid formatting empty fallback texts
+                if (text && !text.includes("No description provided")) {
+                    // Split by period, clean up whitespace, remove empty sentences
+                    let sentences = text.split('.').map(s => s.trim()).filter(s => s.length > 0);
+                    // Render as a beautiful point-wise list
+                    el.innerHTML = sentences.map(s => `
+                        <div class="flex items-start gap-3 mb-3">
+                            <i class="fa-solid fa-circle-check text-agri-accent mt-1 text-sm flex-shrink-0"></i>
+                            <span class="text-gray-700">${s}.</span>
+                        </div>
+                    `).join('');
+                }
+            });
+
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // --- Navbar Scroll Effect ---
+            const navbar = document.querySelector('.glass-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+            });
+
+            // --- Scroll Reveal Animations ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.1, 
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, (index % 2) * 100); // Stagger by 100ms for up to 2 columns
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+            
+            // Close modal when pressing Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    const modals = document.querySelectorAll('[id^="modal-job-"]');
+                    modals.forEach(modal => {
+                        if (!modal.classList.contains('hidden')) {
+                            closeModal(modal.id);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -568,3 +568,58 @@ class BlogAdmin(admin.ModelAdmin):
         queryset.update(is_active=False)
 
     deactivate_blogs.short_description = "Deactivate selected blogs"
+    
+    
+    
+
+
+
+# admin.py
+from django.contrib import admin
+from .models import SiteStats
+
+admin.site.register(SiteStats)
+
+
+
+
+
+
+from django.contrib import admin
+from .models import Job
+
+@admin.register(Job)
+class JobAdmin(admin.ModelAdmin):
+    list_display = ("company", "designation", "location", "job_type", "package", "is_urgent", "deadline", "posted_at", "is_active")
+    list_filter = ("job_type", "is_urgent", "deadline")
+    search_fields = ("company", "designation", "location")
+
+    actions = ["activate_jobs", "deactivate_jobs"]
+
+    def activate_jobs(self, request, queryset):
+        queryset.update(is_active=True)
+        self.message_user(request, "Selected jobs have been activated.")
+    activate_jobs.short_description = "Activate selected jobs"
+
+    def deactivate_jobs(self, request, queryset):
+        queryset.update(is_active=False)
+        self.message_user(request, "Selected jobs have been deactivated.")
+    deactivate_jobs.short_description = "Deactivate selected jobs"
+
+
+
+
+
+# admin.py
+from django.contrib import admin
+from .models import Subscriber
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ("email", "subscribed_at")   # columns shown in admin list
+    search_fields = ("email",)                  # search by email
+    ordering = ("-subscribed_at",)              # newest first
+
+
+
+
